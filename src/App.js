@@ -1,25 +1,22 @@
-import logo from './logo.svg';
+import { PureComponent } from 'react';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { InMemoryCache, ApolloClient } from '@apollo/client';
+import Header from './components/header/Header';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const client = new ApolloClient({
+  uri: 'http://localhost:4000/',
+  cache: new InMemoryCache(),
+});
+
+class App extends PureComponent {
+  render() {
+    return (
+      <ApolloProvider client={client}>
+        <Header />
+      </ApolloProvider>
+    );
+  }
 }
 
 export default App;
