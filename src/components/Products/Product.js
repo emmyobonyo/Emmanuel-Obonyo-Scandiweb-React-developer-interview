@@ -7,6 +7,7 @@ import { PureComponent } from 'react';
 import { useParams } from 'react-router-dom';
 import { Query } from '@apollo/client/react/components';
 import GET_PRODUCTS from '../../graphql/getProducts';
+import Common from '../../assets/images/Common.png'
 
 class Product extends PureComponent {
   render() {
@@ -37,6 +38,7 @@ class Product extends PureComponent {
             return data.category.products.map((product) => (
               <div key={product.id}>
                 <img src={product.gallery[0]} alt={`${product.name}`} />
+                { product.gallery.length > 1 && <img src={Common} alt="add-to-cart" />}
                 <p>{product.name}</p>
                 { chooseCurrency(currency, product) }
               </div>
