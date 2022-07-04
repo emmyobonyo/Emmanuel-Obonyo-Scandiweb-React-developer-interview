@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/display-name */
-/* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable operator-linebreak */
 import { PureComponent } from 'react';
 import { useParams } from 'react-router-dom';
 import { Query } from '@apollo/client/react/components';
+import { Link, Routes, Route } from 'react-router-dom';
 import GET_PRODUCTS from '../../graphql/getProducts';
+import ProductDetail from './ProductDetail';
 import Common from '../../assets/images/Common.png'
 
 class Product extends PureComponent {
