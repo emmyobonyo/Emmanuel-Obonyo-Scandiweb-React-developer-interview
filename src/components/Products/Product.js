@@ -21,6 +21,34 @@ class Product extends PureComponent {
             <span>{product.prices[0].amount}</span>
           </div>
         );
+      } else if (currency === 'GBP') {
+        return (
+          <div>
+            <span>{product.prices[1].currency.symbol}</span>
+            <span>{product.prices[1].amount}</span>
+          </div>
+        )
+      } else if (currency == 'AUD') {
+        return (
+          <div>
+            <span>{product.prices[2].currency.symbol}</span>
+            <span>{product.prices[2].amount}</span>
+          </div>
+        )
+      } else if (currency == 'JPY') {
+        return (
+          <div>
+            <span>{product.prices[2].currency.symbol}</span>
+            <span>{product.prices[2].amount}</span>
+          </div>
+        )
+      } else if (currency === 'RUB') {
+        return (
+          <div>
+            <span>{product.prices[3].currency.symbol}</span>
+            <span>{product.prices[3].amount}</span>
+          </div>
+        )
       }
       return null;
     };
