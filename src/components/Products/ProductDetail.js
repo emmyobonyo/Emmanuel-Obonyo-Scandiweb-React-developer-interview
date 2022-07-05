@@ -111,6 +111,7 @@ class ProductDetail extends PureComponent {
                   <p>PRICE</p>
                   { chooseCurrency( currency, data.product) }
                   <button type="buton">Add To Cart</button>
+                  <p>{data.product.description}</p>
                 </div>
                 }
               </div>
