@@ -38,6 +38,9 @@ class ProductDetail extends PureComponent {
                         </div>
                       </div>
                     )) }
+                    <p>{data.product.prices[0].currency.symbol}</p>
+                    <p>{data.product.prices[0].amount}</p>
+                    <button type="buton">Add To Cart</button>
                   </div>
                 }
                 { data.product.category === 'tech' && data.product.attributes.length > 0 &&
@@ -64,9 +67,11 @@ class ProductDetail extends PureComponent {
                           </div>
                         </div>
                       }
-                      <p>PRICE</p>
                     </div>
                   )) }
+                  <p>{data.product.prices[0].currency.symbol}</p>
+                  <p>{data.product.prices[0].amount}</p>
+                  <button type="buton">Add To Cart</button>
                 </div>
                 }
               </div>
