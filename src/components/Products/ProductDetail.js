@@ -7,7 +7,46 @@ import GET_PRODUCT from "../../graphql/getProduct";
 class ProductDetail extends PureComponent {
   render() {
     const { id } = this.props.params;
-
+    const { currency } = this.props;
+    const chooseCurrency = (currency, product) => {
+      if (currency === 'USD') {
+        return (
+          <div>
+            <span>{product.prices[0].currency.symbol}</span>
+            <span>{product.prices[0].amount}</span>
+          </div>
+        );
+      } else if (currency === 'GBP') {
+        return (
+          <div>
+            <span>{product.prices[1].currency.symbol}</span>
+            <span>{product.prices[1].amount}</span>
+          </div>
+        )
+      } else if (currency == 'AUD') {
+        return (
+          <div>
+            <span>{product.prices[2].currency.symbol}</span>
+            <span>{product.prices[2].amount}</span>
+          </div>
+        )
+      } else if (currency == 'JPY') {
+        return (
+          <div>
+            <span>{product.prices[2].currency.symbol}</span>
+            <span>{product.prices[2].amount}</span>
+          </div>
+        )
+      } else if (currency === 'RUB') {
+        return (
+          <div>
+            <span>{product.prices[3].currency.symbol}</span>
+            <span>{product.prices[3].amount}</span>
+          </div>
+        )
+      }
+      return null;
+    };
     return (
       <Query
         key="yes"
@@ -38,8 +77,8 @@ class ProductDetail extends PureComponent {
                         </div>
                       </div>
                     )) }
-                    <p>{data.product.prices[0].currency.symbol}</p>
-                    <p>{data.product.prices[0].amount}</p>
+                    <p>PRICE</p>
+                    { chooseCurrency( currency, data.product) }
                     <button type="buton">Add To Cart</button>
                   </div>
                 }
@@ -69,8 +108,8 @@ class ProductDetail extends PureComponent {
                       }
                     </div>
                   )) }
-                  <p>{data.product.prices[0].currency.symbol}</p>
-                  <p>{data.product.prices[0].amount}</p>
+                  <p>PRICE</p>
+                  { chooseCurrency( currency, data.product) }
                   <button type="buton">Add To Cart</button>
                 </div>
                 }

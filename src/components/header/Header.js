@@ -1,11 +1,8 @@
-/* eslint-disable arrow-parens */
-/* eslint-disable arrow-body-style */
 import { PureComponent } from 'react';
 import { Query } from '@apollo/client/react/components';
 import { nanoid } from 'nanoid';
 import { Link, Routes, Route } from 'react-router-dom';
 import GET_CATEGORIES from '../../graphql/getCategories';
-// import Currency from './Currencies';
 import Product from '../Products/Product';
 import ProductDetail from '../Products/ProductDetail';
 import logo from '../../assets/images/a-logo.png';
@@ -67,7 +64,7 @@ class Header extends PureComponent {
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} />} />
           <Route path="/:category" element={<Product currency={currency} />} />
-          <Route path="/product/:id" element={ <ProductDetail />} />
+          <Route path="/product/:id" element={ <ProductDetail currency={currency} />} />
         </Routes>
       </div>
     );
