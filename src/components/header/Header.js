@@ -17,13 +17,17 @@ class Header extends PureComponent {
       currency: 'USD',
       symbol: '$',
       cartItems: [],
+      itemInCart: false,
     };
   }
 
   addToCart = (product) => {
     const alreadyInCart = this.state.cartItems.some(item => item.id === item.id)
     if( alreadyInCart ) {
-      console.log('Already in cart')
+      this.setState({ itemInCart: true })
+      setTimeout(() => {
+        this.setState({ itemInCart: false });
+      }, 3000)
     } else {
       product.count = 1;
       this.setState(prevState => ({
@@ -74,6 +78,7 @@ class Header extends PureComponent {
             <img src={cart} alt="cart" />
           </div>
         </nav>
+        { this.state.itemInCart && <p>Item already in cart</p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart}/>} />
