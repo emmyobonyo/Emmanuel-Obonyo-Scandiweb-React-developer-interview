@@ -34,15 +34,15 @@ class Product extends PureComponent {
       } else if (currency == 'JPY') {
         return (
           <div>
-            <span>{product.prices[2].currency.symbol}</span>
-            <span>{product.prices[2].amount}</span>
+            <span>{product.prices[3].currency.symbol}</span>
+            <span>{product.prices[3].amount}</span>
           </div>
         )
       } else if (currency === 'RUB') {
         return (
           <div>
-            <span>{product.prices[3].currency.symbol}</span>
-            <span>{product.prices[3].amount}</span>
+            <span>{product.prices[4].currency.symbol}</span>
+            <span>{product.prices[4].amount}</span>
           </div>
         )
       }
