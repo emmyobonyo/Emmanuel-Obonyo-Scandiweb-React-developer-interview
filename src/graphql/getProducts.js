@@ -7,6 +7,7 @@ query category($input: CategoryInput!) {
       id
       name
       gallery
+      brand
       attributes {
         name
       }
