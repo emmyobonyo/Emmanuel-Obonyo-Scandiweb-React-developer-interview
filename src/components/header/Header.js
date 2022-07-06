@@ -21,10 +21,15 @@ class Header extends PureComponent {
   }
 
   addToCart = (product) => {
-    product.count = 0;
-    this.setState(prevState => ({
-      cartItems: [...prevState.cartItems, product]
-    }))
+    const alreadyInCart = this.state.cartItems.some(item => item.id === item.id)
+    if( alreadyInCart ) {
+      console.log('Already in cart')
+    } else {
+      product.count = 1;
+      this.setState(prevState => ({
+        cartItems: [...prevState.cartItems, product]
+      }))
+    }
   }
 
   onChange = (event) => {
