@@ -3,6 +3,8 @@ import { nanoid } from 'nanoid';
 
 class Cart extends PureComponent {
   render() {
+    const { cartItems } = this.props;
+    console.log(cartItems)
     return (
       <h1>Cart</h1>
     )

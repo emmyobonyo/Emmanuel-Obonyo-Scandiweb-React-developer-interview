@@ -68,7 +68,7 @@ class Product extends PureComponent {
                     { chooseCurrency(currency, product) }
                   </div>
                 </Link>
-                { product.gallery.length > 1 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} />}
+                { product.attributes.length > 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} />}
               </div>
             ));
           }}
