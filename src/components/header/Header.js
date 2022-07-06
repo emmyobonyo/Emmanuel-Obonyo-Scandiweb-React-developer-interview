@@ -16,7 +16,6 @@ class Header extends PureComponent {
     super(props);
     this.state = {
       currency: 'USD',
-      symbol: '$',
       cartItems: [],
       itemInCart: false,
     };
@@ -49,12 +48,12 @@ class Header extends PureComponent {
 
   onChange = (event) => {
     const { value } = event.target;
-    this.setState({ currency: value, symbol: value });
+    this.setState({ currency: value});
   }
 
   render() {
     console.log(this.state)
-    const { currency, symbol } = this.state;
+    const { currency } = this.state;
     return (
       <div>
         <nav>
@@ -71,7 +70,7 @@ class Header extends PureComponent {
           <Link to='/'><img src={logo} alt="logo" /></Link>
           <div>
             {/* <Currency /> */}
-            <select id="currency" onChange={this.onChange} value={symbol}>
+            <select id="currency" onChange={this.onChange} value={currency}>
               <Query query={GET_CURRENCIES}>
                 { ({ loading, data }) => {
                   if (loading) return null;
