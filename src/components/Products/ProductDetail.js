@@ -1,6 +1,8 @@
 import { PureComponent } from "react";
 import { useParams } from 'react-router-dom';
 import { Query } from '@apollo/client/react/components';
+import { nanoid } from 'nanoid';
+import { Interweave } from 'interweave';
 import GET_PRODUCT from "../../graphql/getProduct";
 
 
@@ -59,7 +61,7 @@ class ProductDetail extends PureComponent {
           return (
             <div>
               { data.product.gallery.map((image) => (
-                <img src={image} alt={data.product.name} />
+                <img src={image} alt={data.product.name} key={nanoid()}/>
               )) }
               <img src={data.product.gallery[0]} alt={data.product.name} />
               <div>
@@ -68,11 +70,11 @@ class ProductDetail extends PureComponent {
                 { data.product.category === 'clothes' && data.product.attributes.length > 0 &&
                   <div>
                     { data.product.attributes.map((item) => (
-                      <div>
+                      <div key={nanoid()}>
                         <h3>{item.name}</h3>
                         <div>
                           {item.items.map((itemAttribute) => (
-                            <span>{itemAttribute.value}</span>
+                            <span key={nanoid()}>{itemAttribute.value}</span>
                           ))}
                         </div>
                       </div>
@@ -80,18 +82,19 @@ class ProductDetail extends PureComponent {
                     <p>PRICE</p>
                     { chooseCurrency( currency, data.product) }
                     <button type="buton">Add To Cart</button>
+                    <Interweave content={data.product.description}/>
                   </div>
                 }
                 { data.product.category === 'tech' && data.product.attributes.length > 0 &&
                   <div>
                   { data.product.attributes.map((item) => (
-                    <div>
+                    <div key={nanoid()}>
                       { item.name === 'Color' &&
                         <div>
                           <h3>{item.name}</h3>
                           <div>
                             {item.items.map((value) => (
-                              <span>{value.value}</span>
+                              <span key={nanoid()}>{value.value}</span>
                             ))}
                           </div>
                         </div>
@@ -101,7 +104,7 @@ class ProductDetail extends PureComponent {
                           <h3>{item.name}</h3>
                           <div>
                             {item.items.map((value) => (
-                              <span>{value.value}</span>
+                              <span key={nanoid()}>{value.value}</span>
                             ))}
                           </div>
                         </div>
@@ -111,7 +114,7 @@ class ProductDetail extends PureComponent {
                   <p>PRICE</p>
                   { chooseCurrency( currency, data.product) }
                   <button type="buton">Add To Cart</button>
-                  <p>{data.product.description}</p>
+                  <Interweave content={data.product.description}/>
                 </div>
                 }
               </div>
