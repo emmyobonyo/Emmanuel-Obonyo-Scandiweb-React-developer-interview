@@ -8,6 +8,7 @@ import ProductDetail from '../Products/ProductDetail';
 import logo from '../../assets/images/a-logo.png';
 import cart from '../../assets/images/cart.png';
 import GET_CURRENCIES from '../../graphql/getCurrencies';
+import Cart from '../carts/Cart';
 import './Header.css';
 
 class Header extends PureComponent {
@@ -36,6 +37,12 @@ class Header extends PureComponent {
     }
   }
 
+  removeFromCart = (id) => {
+    this.setState(prevState => ({
+      cartItems: prevState.cartItems.filter(item => item.id !== id)
+    }))
+  }
+
   onChange = (event) => {
     const { value } = event.target;
     this.setState({ currency: value, symbol: value });
@@ -57,7 +64,7 @@ class Header extends PureComponent {
               }}
             </Query>
           </div>
-          <img src={logo} alt="logo" />
+          <Link to='/'><img src={logo} alt="logo" /></Link>
           <div>
             {/* <Currency /> */}
             <select id="currency" onChange={this.onChange} value={symbol}>
@@ -83,6 +90,7 @@ class Header extends PureComponent {
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} />} />
+          <Route path="/cart" element={ <Cart /> }/>
         </Routes>
       </div>
     );

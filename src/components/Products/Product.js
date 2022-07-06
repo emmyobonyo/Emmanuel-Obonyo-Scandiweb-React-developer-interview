@@ -50,7 +50,7 @@ class Product extends PureComponent {
     };
     return (
       <div>
-        <h1>{category}</h1>
+        <h1>{!homepage ? category : homepage}</h1>
         <Query
           key="yes"
           query={GET_PRODUCTS}
