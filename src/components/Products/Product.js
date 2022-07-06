@@ -8,7 +8,7 @@ import Common from '../../assets/images/Common.png'
 class Product extends PureComponent {
   render() {
     const { category } = this.props.params;
-    const { homepage, currency } = this.props;
+    const { homepage, currency, addToCart } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === 'USD') {
         return (
@@ -63,7 +63,7 @@ class Product extends PureComponent {
               <Link to={`/product/${product.id}`} key={product.id}>
                 <div>
                   <img src={product.gallery[0]} alt={`${product.name}`} />
-                  { product.gallery.length > 1 && <img src={Common} alt="add-to-cart" />}
+                  { product.gallery.length > 1 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} />}
                   <p>{product.name}</p>
                   { chooseCurrency(currency, product) }
                 </div>

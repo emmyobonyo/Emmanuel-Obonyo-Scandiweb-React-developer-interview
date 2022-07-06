@@ -25,14 +25,14 @@ class ProductDetail extends PureComponent {
             <span>{product.prices[1].amount}</span>
           </div>
         )
-      } else if (currency == 'AUD') {
+      } else if (currency === 'AUD') {
         return (
           <div>
             <span>{product.prices[2].currency.symbol}</span>
             <span>{product.prices[2].amount}</span>
           </div>
         )
-      } else if (currency == 'JPY') {
+      } else if (currency === 'JPY') {
         return (
           <div>
             <span>{product.prices[2].currency.symbol}</span>

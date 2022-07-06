@@ -16,7 +16,15 @@ class Header extends PureComponent {
     this.state = {
       currency: 'USD',
       symbol: '$',
+      cartItems: [],
     };
+  }
+
+  addToCart = (product) => {
+    product.count = 0;
+    this.setState(prevState => ({
+      cartItems: [...prevState.cartItems, product]
+    }))
   }
 
   onChange = (event) => {
@@ -62,9 +70,9 @@ class Header extends PureComponent {
           </div>
         </nav>
         <Routes>
-          <Route path="/" element={<Product homepage="all" currency={currency} />} />
-          <Route path="/:category" element={<Product currency={currency} />} />
-          <Route path="/product/:id" element={ <ProductDetail currency={currency} />} />
+          <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
+          <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart}/>} />
+          <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} />} />
         </Routes>
       </div>
     );
