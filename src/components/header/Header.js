@@ -82,7 +82,7 @@ class Header extends PureComponent {
                 }}
               </Query>
             </select>
-            <img src={cart} alt="cart" />
+            <Link to='/cart'><img src={cart} alt="cart" /></Link>
           </div>
         </nav>
         { this.state.itemInCart && <p>Item already in cart</p>}
