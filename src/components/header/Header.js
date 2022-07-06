@@ -48,6 +48,7 @@ class Header extends PureComponent {
 
   onChange = (event) => {
     const { value } = event.target;
+    localStorage.setItem('symbol', `${value}`)
     this.setState({ currency: value});
   }
 
@@ -70,7 +71,7 @@ class Header extends PureComponent {
           <Link to='/'><img src={logo} alt="logo" /></Link>
           <div>
             {/* <Currency /> */}
-            <select id="currency" onChange={this.onChange} value={currency}>
+            <select id="currency" onChange={this.onChange} value={localStorage.getItem('symbol')}>
               <Query query={GET_CURRENCIES}>
                 { ({ loading, data }) => {
                   if (loading) return null;
