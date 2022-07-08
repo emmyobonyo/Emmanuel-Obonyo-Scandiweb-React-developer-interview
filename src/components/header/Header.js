@@ -40,11 +40,11 @@ class Header extends PureComponent {
     }
   }
 
-  removeFromCart = (id) => {
-    this.setState(prevState => ({
-      cartItems: prevState.cartItems.filter(item => item.id !== id)
-    }))
-  }
+  // removeFromCart = (id) => {
+  //   this.setState(prevState => ({
+  //     cartItems: prevState.cartItems.filter(item => item.id !== id)
+  //   }))
+  // }
 
   onChange = (event) => {
     const { value } = event.target;
@@ -71,7 +71,7 @@ class Header extends PureComponent {
           <Link to='/'><img src={logo} alt="logo" /></Link>
           <div>
             {/* <Currency /> */}
-            <select onChange={this.onChange} value={localStorage.getItem('symbol')}>
+            <select onChange={this.onChange} value={localStorage.getItem('symbol') || 'USD'}>
                <Query query={GET_CURRENCIES}>
                 { ({ loading, data }) => {
                   if (loading) return null;

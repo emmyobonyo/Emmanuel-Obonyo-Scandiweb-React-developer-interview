@@ -3,9 +3,15 @@ import { nanoid } from 'nanoid';
 
 class Cart extends PureComponent {
   render() {
+    const addCount = () => {
+      console.log('add')
+    }
+    const subtractCount = () =>{
+      console.log('subtract')
+    }
     const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
     console.log(cartItems)
-    const { currency } = this.props;
+    const { currency, removeFromCart } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === 'USD') {
         return (
@@ -67,6 +73,12 @@ class Cart extends PureComponent {
               )) }
               <p>PRICE</p>
               { chooseCurrency( currency, item) }
+              <button onClick={() => removeFromCart(item.id)}>Delete</button>
+              <div>
+                <button onClick={addCount}>+</button>
+                <span>{item.count}</span>
+                <button onClick={subtractCount}>-</button>
+              </div>
             </div>
           }
           { item.category === 'tech' && item.attributes.length > 0 &&
