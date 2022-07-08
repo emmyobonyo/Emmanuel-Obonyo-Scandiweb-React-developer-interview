@@ -16,7 +16,7 @@ class Header extends PureComponent {
     super(props);
     this.state = {
       currency: 'USD',
-      cartItems: [],
+      cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
       itemInCart: false,
     };
   }
@@ -38,6 +38,13 @@ class Header extends PureComponent {
         cartItems: [...prevState.cartItems, product]
       }))
     }
+  }
+
+  removeFromCart = (id) => {
+    this.setState(prevState => ({
+      cartItems: prevState.cartItems.filter(item => item.id !== id)
+    }))
+    localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems))
   }
 
   onChange = (event) => {
@@ -88,7 +95,7 @@ class Header extends PureComponent {
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} />} />
-          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} /> }/>
+          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart}/> }/>
         </Routes>
       </div>
     );
