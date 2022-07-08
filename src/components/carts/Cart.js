@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 class Cart extends PureComponent {
 
   render() {
-    const { currency, removeFromCart, cartItems, increment, decrement } = this.props;
+    const { currency, removeFromCart, cartItems, increment, decrement, total } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === 'USD') {
         return (
@@ -112,6 +112,9 @@ class Cart extends PureComponent {
           }
         </div>
       ))}
+      <div>
+        <h3>{total}</h3>
+      </div>
       </div>
     )
   }
