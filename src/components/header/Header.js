@@ -61,6 +61,14 @@ class Header extends PureComponent {
     }))
   }
 
+  decrement = (id) => {
+    this.setState(prevState => ({
+      cartItems: prevState.cartItems.map((item) => {
+        return item.id === id ? {...item, count: item.count - 1} : item
+      })
+    }))
+  }
+
   render() {
     console.log(this.state)
     const { currency } = this.state;
@@ -103,7 +111,7 @@ class Header extends PureComponent {
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} />} />
-          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment}/> }/>
+          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement}/> }/>
         </Routes>
       </div>
     );
