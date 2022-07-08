@@ -54,7 +54,11 @@ class Header extends PureComponent {
   }
 
   increment = (id) => {
-    console.log(id)
+    this.setState(prevState => ({
+      cartItems: prevState.cartItems.map((item) => {
+        return item.id === id ? {...item, count: item.count + 1} : item
+      })
+    }))
   }
 
   render() {
