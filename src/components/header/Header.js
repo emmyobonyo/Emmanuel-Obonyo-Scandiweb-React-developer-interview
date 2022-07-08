@@ -48,6 +48,7 @@ class Header extends PureComponent {
 
   onChange = (event) => {
     const { value } = event.target;
+    localStorage.setItem("symbol", `${value}`)
     this.setState({ currency: value});
   }
 
@@ -70,7 +71,7 @@ class Header extends PureComponent {
           <Link to='/'><img src={logo} alt="logo" /></Link>
           <div>
             {/* <Currency /> */}
-            <select onChange={this.onChange} value={currency}>
+            <select onChange={this.onChange} value={localStorage.getItem('symbol')}>
                <Query query={GET_CURRENCIES}>
                 { ({ loading, data }) => {
                   if (loading) return null;
@@ -93,7 +94,7 @@ class Header extends PureComponent {
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} />} />
-          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} /> }/>
+          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} /> }/>
         </Routes>
       </div>
     );

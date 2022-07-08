@@ -8,8 +8,12 @@ query category($input: CategoryInput!) {
       name
       gallery
       brand
+      category
       attributes {
         name
+        items {
+          value
+        }
       }
       prices {
         currency {
