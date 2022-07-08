@@ -69,6 +69,36 @@ class Cart extends PureComponent {
               { chooseCurrency( currency, item) }
             </div>
           }
+          { item.category === 'tech' && item.attributes.length > 0 &&
+            <div>
+            { item.attributes.map((item) => (
+              <div key={nanoid()}>
+                { item.name === 'Color' &&
+                  <div>
+                    <h3>{item.name}</h3>
+                    <div>
+                      {item.items.map((value) => (
+                        <span key={nanoid()}>{value.value}</span>
+                      ))}
+                    </div>
+                  </div>
+                }
+                { item.name === 'Capacity' &&
+                  <div>
+                    <h3>{item.name}</h3>
+                    <div>
+                      {item.items.map((value) => (
+                        <span key={nanoid()}>{value.value}</span>
+                      ))}
+                    </div>
+                  </div>
+                }
+              </div>
+            )) }
+            <p>PRICE</p>
+            { chooseCurrency( currency, item) }
+          </div>
+          }
         </div>
       ))}
       </div>
