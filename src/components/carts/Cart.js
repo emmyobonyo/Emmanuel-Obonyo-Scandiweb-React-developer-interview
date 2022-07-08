@@ -2,21 +2,9 @@ import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
 
 class Cart extends PureComponent {
-  // constructor() {
-  //   super();
-  //   this.state =  {
-  //     cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
-  //   }
-  // }
 
   render() {
-    const addCount = () => {
-      console.log('add')
-    }
-    const subtractCount = () =>{
-      console.log('subtract')
-    }
-    const { currency, removeFromCart, cartItems } = this.props;
+    const { currency, removeFromCart, cartItems, increment } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === 'USD') {
         return (
@@ -80,9 +68,9 @@ class Cart extends PureComponent {
               { chooseCurrency( currency, item) }
               <button onClick={() => removeFromCart(item.id)}>Delete</button>
               <div>
-                <button onClick={addCount}>+</button>
+                <button onClick={() => increment(item.id)}>+</button>
                 <span>{item.count}</span>
-                <button onClick={subtractCount}>-</button>
+                <button onClick={() => increment(item.id)}>-</button>
               </div>
             </div>
           }
@@ -114,6 +102,12 @@ class Cart extends PureComponent {
             )) }
             <p>PRICE</p>
             { chooseCurrency( currency, item) }
+            <button onClick={() => removeFromCart(item.id)}>Delete</button>
+              <div>
+                <button onClick={() => increment(item.id)}>+</button>
+                <span>{item.count}</span>
+                <button onClick={() => increment(item.id)}>-</button>
+              </div>
           </div>
           }
         </div>
