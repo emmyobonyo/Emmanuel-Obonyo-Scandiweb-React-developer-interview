@@ -2,16 +2,29 @@ import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
 
 class Cart extends PureComponent {
+  constructor() {
+    super();
+    this.state =  {
+      cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
+    }
+  }
+
   render() {
+    const removeFromCart = (id) => {
+      this.setState(prevState => ({
+        cartItems: prevState.cartItems.filter(item => item.id !== id)
+      }))
+    }
+
     const addCount = () => {
       console.log('add')
     }
     const subtractCount = () =>{
       console.log('subtract')
     }
-    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    console.log(cartItems)
-    const { currency, removeFromCart } = this.props;
+    // const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
+    // console.log(cartItems)
+    const { currency } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === 'USD') {
         return (
@@ -54,7 +67,7 @@ class Cart extends PureComponent {
     return (
       <div>
         <h1>Cart</h1>
-       { cartItems.map((item) => (
+       { this.state.cartItems.map((item) => (
         <div key={nanoid()}>
           <hr />
           <h3>{ item.brand }</h3>

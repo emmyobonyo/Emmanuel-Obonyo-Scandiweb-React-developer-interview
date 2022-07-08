@@ -40,12 +40,6 @@ class Header extends PureComponent {
     }
   }
 
-  // removeFromCart = (id) => {
-  //   this.setState(prevState => ({
-  //     cartItems: prevState.cartItems.filter(item => item.id !== id)
-  //   }))
-  // }
-
   onChange = (event) => {
     const { value } = event.target;
     localStorage.setItem("symbol", `${value}`)
