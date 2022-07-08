@@ -113,7 +113,7 @@ class Cart extends PureComponent {
         </div>
       ))}
       <div>
-        <h3>{total}</h3>
+        <h3>{`${total} ${currency}`}</h3>
       </div>
       </div>
     )
