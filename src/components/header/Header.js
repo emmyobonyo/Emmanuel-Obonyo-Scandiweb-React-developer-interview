@@ -16,8 +16,9 @@ class Header extends PureComponent {
     super(props);
     this.state = {
       currency: 'USD',
-      cartItems: [],
+      cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
       itemInCart: false,
+      total: '$',
     };
   }
 
@@ -44,6 +45,7 @@ class Header extends PureComponent {
     this.setState(prevState => ({
       cartItems: prevState.cartItems.filter(item => item.id !== id)
     }))
+    localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems))
   }
 
   onChange = (event) => {
@@ -52,7 +54,49 @@ class Header extends PureComponent {
     this.setState({ currency: value});
   }
 
+  increment = (id) => {
+    this.setState(prevState => ({
+      cartItems: prevState.cartItems.map((item) => {
+        return item.id === id ? {...item, count: item.count + 1} : item
+      })
+    }))
+  }
+
+  decrement = (id) => {
+    this.setState(prevState => ({
+      cartItems: prevState.cartItems.map((item) => {
+        return item.id === id ? {...item, count: item.count - 1} : item
+      })
+    }))
+  }
+
+  getTotal = () => {
+    let total = 0
+    for(let i = 0; i<this.state.cartItems.length; i++) {
+      if (this.state.currency === 'USD') {
+        const price = this.state.cartItems[i].prices[0].amount * this.state.cartItems[i].count
+        total += price
+      } else if (this.state.currency === 'GBP') {
+        const price = this.state.cartItems[i].prices[1].amount * this.state.cartItems[i].count
+        total += price
+      } else if (this.state.currency == 'AUD') {
+        const price = this.state.cartItems[i].prices[2].amount * this.state.cartItems[i].count
+        total += price
+      } else if (this.state.currency == 'JPY') {
+        const price = this.state.cartItems[i].prices[3].amount * this.state.cartItems[i].count
+        total += price
+      } else if (this.state.currency === 'RUB') {
+        const price = this.state.cartItems[i].prices[4].amount * this.state.cartItems[i].count
+        total += price
+      }
+    }
+     this.setState({
+      total: total
+     })
+  }
+
   render() {
+    this.getTotal();
     console.log(this.state)
     const { currency } = this.state;
     return (
@@ -71,7 +115,7 @@ class Header extends PureComponent {
           <Link to='/'><img src={logo} alt="logo" /></Link>
           <div>
             {/* <Currency /> */}
-            <select onChange={this.onChange} value={localStorage.getItem('symbol')}>
+            <select onChange={this.onChange} value={localStorage.getItem('symbol') || 'USD'}>
                <Query query={GET_CURRENCIES}>
                 { ({ loading, data }) => {
                   if (loading) return null;
@@ -94,7 +138,7 @@ class Header extends PureComponent {
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart}/>} />
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} />} />
-          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} /> }/>
+          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} /> }/>
         </Routes>
       </div>
     );

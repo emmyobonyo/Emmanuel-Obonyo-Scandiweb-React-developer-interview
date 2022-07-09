@@ -1,11 +1,11 @@
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
+import Carousel from 'nuka-carousel';
 
 class Cart extends PureComponent {
+
   render() {
-    const cartItems = JSON.parse(localStorage.getItem("cartItems") || "[]");
-    console.log(cartItems)
-    const { currency } = this.props;
+    const { currency, removeFromCart, cartItems, increment, decrement, total } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === 'USD') {
         return (
@@ -67,6 +67,22 @@ class Cart extends PureComponent {
               )) }
               <p>PRICE</p>
               { chooseCurrency( currency, item) }
+              <button onClick={() => removeFromCart(item.id)}>Delete</button>
+              <div>
+                <button onClick={() => increment(item.id)}>+</button>
+                <span>{item.count}</span>
+                <button onClick={() => decrement(item.id)}>-</button>
+              </div>
+              { item.gallery.length > 1 &&
+                <Carousel>
+                  { item.gallery.map((image) => (
+                    <img src={image} />
+                  )) }
+                </Carousel>
+              }
+              { item.gallery.length < 2 &&
+                <img src={ item.gallery[0] }/>
+              }
             </div>
           }
           { item.category === 'tech' && item.attributes.length > 0 &&
@@ -97,10 +113,19 @@ class Cart extends PureComponent {
             )) }
             <p>PRICE</p>
             { chooseCurrency( currency, item) }
+            <button onClick={() => removeFromCart(item.id)}>Delete</button>
+              <div>
+                <button onClick={() => increment(item.id)}>+</button>
+                <span>{item.count}</span>
+                <button onClick={() => decrement(item.id)}>-</button>
+              </div>
           </div>
           }
         </div>
       ))}
+      <div>
+        <h3>{`${total} ${currency}`}</h3>
+      </div>
       </div>
     )
   }
