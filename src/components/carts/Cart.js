@@ -1,5 +1,6 @@
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
+import Carousel from 'nuka-carousel';
 
 class Cart extends PureComponent {
 
@@ -72,11 +73,11 @@ class Cart extends PureComponent {
                 <span>{item.count}</span>
                 <button onClick={() => decrement(item.id)}>-</button>
               </div>
-              {/* <AwesomeSlider>
+              <Carousel>
                 { item.gallery.map((image) => (
-                  <img key={nanoid()} src={image}/>
+                  <img src={image} />
                 )) }
-              </AwesomeSlider> */}
+              </Carousel>
             </div>
           }
           { item.category === 'tech' && item.attributes.length > 0 &&
