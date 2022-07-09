@@ -72,6 +72,11 @@ class Cart extends PureComponent {
                 <span>{item.count}</span>
                 <button onClick={() => decrement(item.id)}>-</button>
               </div>
+              {/* <AwesomeSlider>
+                { item.gallery.map((image) => (
+                  <img key={nanoid()} src={image}/>
+                )) }
+              </AwesomeSlider> */}
             </div>
           }
           { item.category === 'tech' && item.attributes.length > 0 &&
