@@ -76,7 +76,7 @@ class Cart extends PureComponent {
               { item.gallery.length > 1 &&
                 <Carousel>
                   { item.gallery.map((image) => (
-                    <img src={image} />
+                    <img key={nanoid()} src={image} />
                   )) }
                 </Carousel>
               }
@@ -122,12 +122,12 @@ class Cart extends PureComponent {
               { item.gallery.length > 1 &&
                 <Carousel>
                   { item.gallery.map((image) => (
-                    <img src={image} />
+                    <img key={nanoid()} src={image} />
                   )) }
                 </Carousel>
               }
               { item.gallery.length < 2 &&
-                <img src={ item.gallery[0] }/>
+                <img src={ item.gallery[0] } />
               }
           </div>
           }
