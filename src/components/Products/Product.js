@@ -4,6 +4,7 @@ import { Query } from '@apollo/client/react/components';
 import { Link } from 'react-router-dom';
 import GET_PRODUCTS from '../../graphql/getProducts';
 import Common from '../../assets/images/Common.png'
+import './Product.css'
 
 class Product extends PureComponent {
   render() {
@@ -12,35 +13,35 @@ class Product extends PureComponent {
     const chooseCurrency = (currency, product) => {
       if (currency === 'USD') {
         return (
-          <div>
+          <div className="product-price">
             <span>{product.prices[0].currency.symbol}</span>
             <span>{product.prices[0].amount}</span>
           </div>
         );
       } else if (currency === 'GBP') {
         return (
-          <div>
+          <div className="product-price">
             <span>{product.prices[1].currency.symbol}</span>
             <span>{product.prices[1].amount}</span>
           </div>
         )
       } else if (currency == 'AUD') {
         return (
-          <div>
+          <div className="product-price">
             <span>{product.prices[2].currency.symbol}</span>
             <span>{product.prices[2].amount}</span>
           </div>
         )
       } else if (currency == 'JPY') {
         return (
-          <div>
+          <div className="product-price">
             <span>{product.prices[3].currency.symbol}</span>
             <span>{product.prices[3].amount}</span>
           </div>
         )
       } else if (currency === 'RUB') {
         return (
-          <div>
+          <div className="product-price">
             <span>{product.prices[4].currency.symbol}</span>
             <span>{product.prices[4].amount}</span>
           </div>
@@ -50,29 +51,33 @@ class Product extends PureComponent {
     };
     return (
       <div className='products'>
-        <h1>{!homepage ? category : homepage}</h1>
-        <Query
-          key="yes"
-          query={GET_PRODUCTS}
-          variables={{ input: { title: `${!category ? homepage : category}` } }}
-          fetchPolicy="network-only"
-        >
-          {({ loading, data }) => {
-            if (loading) return null;
-            return data.category.products.map((product) => (
-              <div key={product.id}>
-                <Link to={`/product/${product.id}`}>
-                  <div>
-                    <img src={product.gallery[0]} alt={`${product.name}`} />
-                    <p>{product.name}</p>
-                    { chooseCurrency(currency, product) }
-                  </div>
-                </Link>
-                { product.attributes.length > 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} />}
-              </div>
-            ));
-          }}
-        </Query>
+        <h1 className='category'>{!homepage ? category : homepage}</h1>
+        <div className='product-items'>
+          <Query
+            key="yes"
+            query={GET_PRODUCTS}
+            variables={{ input: { title: `${!category ? homepage : category}` } }}
+            fetchPolicy="network-only"
+          >
+            {({ loading, data }) => {
+              if (loading) return null;
+              return data.category.products.map((product) => (
+                <div key={product.id} className='product-item'>
+                  <Link to={`/product/${product.id}`}>
+                    <div>
+                      <div className='image-div'>
+                        <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} />
+                        { product.attributes.length > 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
+                      </div>
+                      <p>{product.name}</p>
+                      { chooseCurrency(currency, product) }
+                    </div>
+                  </Link>
+                </div>
+              ));
+            }}
+          </Query>
+        </div>
       </div>
     );
   }
