@@ -57,7 +57,7 @@ class Header extends PureComponent {
     const { dataset } = event.target;
     console.log(dataset.value)
     localStorage.setItem("symbol", `${dataset.value}`)
-    this.setState({ currency: dataset.value});
+    this.setState({ currency: dataset.value, currencyOverlay: false});
   }
 
   increment = (id) => {
@@ -156,22 +156,24 @@ class Header extends PureComponent {
                 <span><b>{ `${ this.state.currency }` }</b></span>
                 <img className='currency-icon' src={ this.state.currencyOverlay ? downIcon : upIcon }/>
               </div>
+              { this.state.currencyOverlay &&
               <ul className='ul'>
-              <Query query={GET_CURRENCIES}>
-                { ({ loading, data }) => {
-                  if (loading) return null;
-                  return data.currencies.map((currency) => (
-                    <li
-                      key={nanoid()}
-                      data-value={currency.symbol}
-                      onClick={this.onChange}
-                    >
-                      {`${currency.symbol} ${currency.label}`}
-                    </li>
-                  ));
-                }}
-              </Query>
+                <Query query={GET_CURRENCIES}>
+                  { ({ loading, data }) => {
+                    if (loading) return null;
+                    return data.currencies.map((currency) => (
+                      <li
+                        key={nanoid()}
+                        data-value={currency.symbol}
+                        onClick={this.onChange}
+                      >
+                        {`${currency.symbol} ${currency.label}`}
+                      </li>
+                    ));
+                  }}
+                </Query>
               </ul>
+              }
             </div>
             {/* <Currency /> */}
             {/* <select onChange={this.onChange} value={localStorage.getItem('symbol') || 'USD'}>

@@ -42,7 +42,7 @@ a {
 
 .ul {
   position: absolute;
-  right: 100px;
+  right: 110px;
   top: 50px
 }
 
@@ -53,6 +53,24 @@ a {
 
 .currency-div {
   cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  /* margin: 5px 0; */
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+li {
+  padding: 5px 10px;
+  margin: 0;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+li:hover {
+  background-color: #eee;
 }
 
 /* select {
