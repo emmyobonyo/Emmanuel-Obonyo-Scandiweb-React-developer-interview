@@ -1,6 +1,7 @@
 nav {
   display: flex;
   justify-content: space-between;
+  border: 1px solid black;
 }
 
 .nav-ul {
@@ -10,4 +11,8 @@ nav {
 .nav-li {
   float: left;
   padding: 0 15px;
+}
+
+.active {
+  border-bottom: 1px solid green;
 }
