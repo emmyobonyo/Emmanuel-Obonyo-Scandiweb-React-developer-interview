@@ -49,7 +49,7 @@ class Product extends PureComponent {
       return null;
     };
     return (
-      <div>
+      <div className='products'>
         <h1>{!homepage ? category : homepage}</h1>
         <Query
           key="yes"
