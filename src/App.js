@@ -10,11 +10,33 @@ const client = new ApolloClient({
 });
 
 class App extends PureComponent {
+  constructor() {
+    super();
+    this.state = {
+      hover: false,
+    };
+  }
+
+  onHover = () => {
+    this.setState({
+      hover: true,
+    })
+
+  }
+
+  onLeaveHover = () => {
+    this.setState({
+      hover: false
+    })
+  }
+
   render() {
     return (
-      <ApolloProvider client={client}>
-        <Header />
+      <div className={ this.state.hover? 'body': 'hover' }>
+        <ApolloProvider client={client}>
+        <Header onHover={this.onHover} onLeaveHover={this.onLeaveHover}/>
       </ApolloProvider>
+      </div>
     );
   }
 }

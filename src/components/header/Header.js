@@ -98,6 +98,7 @@ class Header extends PureComponent {
   }
 
   render() {
+    const { onHover, onLeaveHover } = this.props; 
     this.getTotal();
     const showCartOverlay = () => {
       this.setState({
@@ -108,6 +109,15 @@ class Header extends PureComponent {
       this.setState({
         cartOverlay: false,
       })
+    }
+    const onMouseEnter = () => {
+      showCartOverlay()
+      onHover()
+    }
+    const onMouseLeave = () => {
+      hideCartOverlay()
+      onLeaveHover()
+
     }
     console.log(this.state)
     const { currency } = this.state;
@@ -142,7 +152,7 @@ class Header extends PureComponent {
                 }}
               </Query>
             </select>
-            <Link to='/cart'><img src={cart} alt="cart" onMouseEnter={showCartOverlay} onMouseLeave={hideCartOverlay} className="cart" /></Link>
+            <Link to='/cart'><img src={cart} alt="cart" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="cart" /></Link>
           </div>
         </nav>
         { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} onMouseOut={hideCartOverlay}/> : ''}
