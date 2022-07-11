@@ -146,7 +146,7 @@ class Header extends PureComponent {
                       key={nanoid()}
                       value={currency.label}
                     >
-                      {`${currency.symbol}`}
+                      {`${currency.symbol} ${currency.label}`}
                     </option>
                   ));
                 }}
