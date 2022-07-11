@@ -36,7 +36,37 @@ a {
   margin-left: 15px;
 }
 
-select {
+.currency {
+  position: relative;
+}
+
+.ul {
+  position: absolute;
+  right: 100px;
+  top: 50px
+}
+
+.currency-icon {
+  margin-left: 5px;
+  margin-bottom: 2px;
+}
+
+.currency-div {
+  cursor: pointer;
+}
+
+/* select {
   border: none;
   font-size: 18px;
+  padding: 5px;
 }
+
+select option:checked:after {
+  content: attr(title);
+  background: #666;
+  color: #fff;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  border: none;
+} */

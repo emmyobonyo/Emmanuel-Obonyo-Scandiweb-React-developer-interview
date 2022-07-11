@@ -7,35 +7,35 @@ class Cart extends PureComponent {
   render() {
     const { currency, removeFromCart, cartItems, increment, decrement, total } = this.props;
     const chooseCurrency = (currency, product) => {
-      if (currency === 'USD') {
+      if (currency === '$') {
         return (
           <div>
             <span>{product.prices[0].currency.symbol}</span>
             <span>{product.prices[0].amount}</span>
           </div>
         );
-      } else if (currency === 'GBP') {
+      } else if (currency === '£') {
         return (
           <div>
             <span>{product.prices[1].currency.symbol}</span>
             <span>{product.prices[1].amount}</span>
           </div>
         )
-      } else if (currency == 'AUD') {
+      } else if (currency == 'A$') {
         return (
           <div>
             <span>{product.prices[2].currency.symbol}</span>
             <span>{product.prices[2].amount}</span>
           </div>
         )
-      } else if (currency == 'JPY') {
+      } else if (currency == '¥') {
         return (
           <div>
             <span>{product.prices[3].currency.symbol}</span>
             <span>{product.prices[3].amount}</span>
           </div>
         )
-      } else if (currency === 'RUB') {
+      } else if (currency === '₽') {
         return (
           <div>
             <span>{product.prices[4].currency.symbol}</span>
@@ -134,7 +134,7 @@ class Cart extends PureComponent {
         </div>
       ))}
       <div>
-        <h3>{`${total} ${currency}`}</h3>
+        <h3>{ total == 0 ? 'You have no items in the cart' : `${ currency } ${total}` }</h3>
       </div>
       </div>
     )
