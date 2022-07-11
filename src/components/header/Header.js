@@ -1,7 +1,7 @@
 import { PureComponent } from 'react';
 import { Query } from '@apollo/client/react/components';
 import { nanoid } from 'nanoid';
-import { Link, Routes, Route } from 'react-router-dom';
+import { NavLink, Link, Routes, Route } from 'react-router-dom';
 import GET_CATEGORIES from '../../graphql/getCategories';
 import Product from '../Products/Product';
 import ProductDetail from '../Products/ProductDetail';
@@ -9,6 +9,7 @@ import logo from '../../assets/images/a-logo.png';
 import cart from '../../assets/images/cart.png';
 import GET_CURRENCIES from '../../graphql/getCurrencies';
 import Cart from '../carts/Cart';
+import CartOverlay from '../carts/CartOverlay';
 import './Header.css';
 
 class Header extends PureComponent {
@@ -19,6 +20,7 @@ class Header extends PureComponent {
       cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
       itemInCart: false,
       total: '$',
+      cartOverlay: false,
     };
   }
 
@@ -97,17 +99,27 @@ class Header extends PureComponent {
 
   render() {
     this.getTotal();
+    const showCartOverlay = () => {
+      this.setState({
+        cartOverlay: true,
+      })
+    }
+    const hideCartOverlay = () => {
+      this.setState({
+        cartOverlay: false,
+      })
+    }
     console.log(this.state)
     const { currency } = this.state;
     return (
-      <div>
+      <div className='header-div'>
         <nav>
           <div className="nav-ul">
             <Query query={GET_CATEGORIES}>
               { ({ loading, data }) => {
                 if (loading) return null;
                 return data.categories.map((category) => (
-                  <Link to={`/${category.name}`} key={nanoid()} className="nav-li">{category.name.toUpperCase()}</Link>
+                  <NavLink to={`/${category.name}`} key={nanoid()} className="nav-li" activeClassName='active'>{category.name.toUpperCase()}</NavLink>
                 ));
               }}
             </Query>
@@ -130,9 +142,12 @@ class Header extends PureComponent {
                 }}
               </Query>
             </select>
-            <Link to='/cart'><img src={cart} alt="cart" /></Link>
+            <div onMouseEnter={showCartOverlay} onMouseLeave={hideCartOverlay}>
+              <Link to='/cart'><img src={cart} alt="cart" /></Link>
+            </div>
           </div>
         </nav>
+        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} onMouseOut={hideCartOverlay}/> : ''}
         { this.state.itemInCart && <p>Item already in cart</p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart}/>} />
