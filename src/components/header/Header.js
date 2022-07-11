@@ -125,7 +125,7 @@ class Header extends PureComponent {
             </Query>
           </div>
           <Link to='/'><img src={logo} alt="logo" /></Link>
-          <div>
+          <div className='nav-right'>
             {/* <Currency /> */}
             <select onChange={this.onChange} value={localStorage.getItem('symbol') || 'USD'}>
                <Query query={GET_CURRENCIES}>
@@ -136,15 +136,13 @@ class Header extends PureComponent {
                       key={nanoid()}
                       value={currency.label}
                     >
-                      {`${currency.symbol} ${currency.label}`}
+                      {`${currency.symbol}`}
                     </option>
                   ));
                 }}
               </Query>
             </select>
-            <div onMouseEnter={showCartOverlay} onMouseLeave={hideCartOverlay}>
-              <Link to='/cart'><img src={cart} alt="cart" /></Link>
-            </div>
+            <Link to='/cart'><img src={cart} alt="cart" onMouseEnter={showCartOverlay} onMouseLeave={hideCartOverlay} className="cart" /></Link>
           </div>
         </nav>
         { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} onMouseOut={hideCartOverlay}/> : ''}
