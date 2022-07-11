@@ -1,0 +1,39 @@
+.products {
+  max-width: 80%;
+  margin: auto;
+}
+
+.product-items {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  gap: 50px;
+}
+
+.product-item {
+  width: 100%;
+}
+
+.product-image {
+  max-width: 100%;
+  height: 300px;
+}
+
+.category {
+  margin-bottom: 100px;
+}
+
+.product-price {
+  font-weight: bold;
+}
+
+.image-div {
+  position: relative;
+}
+
+.add-to-cart-button {
+  position: absolute;
+  bottom: -15px;
+  right: 30px;
+  width: 10%;
+}
+
