@@ -19,9 +19,8 @@ class App extends PureComponent {
 
   onHover = () => {
     this.setState({
-      hover: true,
+      hover: true
     })
-
   }
 
   onLeaveHover = () => {

@@ -34,6 +34,7 @@ a {
 
 .cart {
   margin-left: 15px;
+  cursor: pointer;
 }
 
 .currency {

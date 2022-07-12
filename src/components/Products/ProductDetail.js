@@ -128,7 +128,7 @@ class ProductDetail extends PureComponent {
                   )) }
                   <h4>PRICE</h4>
                   { chooseCurrency( currency, data.product) }
-                  <button type="buton">Add To Cart</button>
+                  <button className="detail-page-button" style={{ marginTop: 20, marginBottom: 20}} type="buton">ADD TO CART</button>
                   <Interweave content={data.product.description}/>
                 </div>
                 }

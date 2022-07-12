@@ -76,12 +76,6 @@ class Header extends PureComponent {
     }))
   }
 
-  closeCurrencyOverlay = () => {
-    this.setState({
-      currencyOverlay: false,
-    })
-  }
-
   getTotal = () => {
     let total = 0
     for(let i = 0; i<this.state.cartItems.length; i++) {
@@ -121,15 +115,26 @@ class Header extends PureComponent {
       })
     }
     const onMouseEnter = () => {
-      showCartOverlay()
-      onHover()
+      if (this.state.cartOverlay) {
+        hideCartOverlay()
+        onLeaveHover()
+      } else {
+        showCartOverlay()
+        onHover()
+      }
     }
-    const onMouseLeave = () => {
-      hideCartOverlay()
-      onLeaveHover()
-
+    const closeCurrencyOverlay = () => {
+      if( this.state.cartOverlay ) {
+        onMouseEnter()
+      }
+      this.setState({
+        currencyOverlay: false,
+      })
     }
     const changeCurrencyOverlay = (e) => {
+      if (this.state.cartOverlay) {
+        onMouseEnter()
+      }
       this.setState(prevState => ({
         currencyOverlay: !prevState.currencyOverlay,
       }))
@@ -140,7 +145,7 @@ class Header extends PureComponent {
     console.log(this.state)
     const { currency } = this.state;
     return (
-      <div className='header-div' onClick={this.closeCurrencyOverlay}>
+      <div className='header-div' onClick={closeCurrencyOverlay}>
         <nav>
           <div className="nav-ul">
             <Query query={GET_CATEGORIES}>
@@ -194,16 +199,16 @@ class Header extends PureComponent {
                 }}
               </Query>
             </select> */}
-            <Link to='/cart'><img src={cart} alt="cart" onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} className="cart" /></Link>
+            <img src={cart} alt="cart" onClick={onMouseEnter} className="cart" />
           </div>
         </nav>
-        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} onMouseOut={hideCartOverlay}/> : ''}
+        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} /> : ''}
         { this.state.itemInCart && <p>Item already in cart</p>}
         <Routes>
-          <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={this.closeCurrencyOverlay}/>} />
-          <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={this.closeCurrencyOverlay}/>}/>
-          <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={this.closeCurrencyOverlay}/>} />
-          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={this.closeCurrencyOverlay}/> }/>
+          <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
+          <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>}/>
+          <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
+          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={closeCurrencyOverlay}/> }/>
         </Routes>
       </div>
     );
