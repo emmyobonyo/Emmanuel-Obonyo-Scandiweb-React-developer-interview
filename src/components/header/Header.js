@@ -84,19 +84,19 @@ class Header extends PureComponent {
   getTotal = () => {
     let total = 0
     for(let i = 0; i<this.state.cartItems.length; i++) {
-      if (this.state.currency === 'USD') {
+      if (this.state.currency === '$') {
         const price = this.state.cartItems[i].prices[0].amount * this.state.cartItems[i].count
         total += price
-      } else if (this.state.currency === 'GBP') {
+      } else if (this.state.currency === '£') {
         const price = this.state.cartItems[i].prices[1].amount * this.state.cartItems[i].count
         total += price
-      } else if (this.state.currency == 'AUD') {
+      } else if (this.state.currency == 'A$') {
         const price = this.state.cartItems[i].prices[2].amount * this.state.cartItems[i].count
         total += price
-      } else if (this.state.currency == 'JPY') {
+      } else if (this.state.currency == '¥') {
         const price = this.state.cartItems[i].prices[3].amount * this.state.cartItems[i].count
         total += price
-      } else if (this.state.currency === 'RUB') {
+      } else if (this.state.currency === '₽') {
         const price = this.state.cartItems[i].prices[4].amount * this.state.cartItems[i].count
         total += price
       }
