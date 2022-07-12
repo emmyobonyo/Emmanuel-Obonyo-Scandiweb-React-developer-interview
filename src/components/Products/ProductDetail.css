@@ -1,0 +1,25 @@
+.product-detail {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid black;
+}
+
+.product-detail-images {
+  width: 10%;
+}
+
+.detail-page-image {
+  width: 60%;
+}
+
+.detail-page-details {
+  width: 30%;
+}
+
+.detail-page-thumnails {
+  max-width: 100%;
+  height: 100px;
+  cursor: pointer;
+}

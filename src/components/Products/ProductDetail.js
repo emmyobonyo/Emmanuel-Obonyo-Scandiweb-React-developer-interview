@@ -4,9 +4,22 @@ import { Query } from '@apollo/client/react/components';
 import { nanoid } from 'nanoid';
 import { Interweave } from 'interweave';
 import GET_PRODUCT from "../../graphql/getProduct";
+import './ProductDetail.css'
 
 
 class ProductDetail extends PureComponent {
+  constructor(props) {
+    super(props)
+    this.state = {
+      image: null,
+    }
+  }
+
+  changeImage = (src) => {
+    this.setState({
+      image: src
+    })
+  }
   render() {
     const { id } = this.props.params;
     const { currency } = this.props;
@@ -59,12 +72,14 @@ class ProductDetail extends PureComponent {
         {({ loading, data}) => {
           if (loading) return null;
           return (
-            <div>
-              { data.product.gallery.map((image) => (
-                <img src={image} alt={data.product.name} key={nanoid()}/>
-              )) }
-              <img src={data.product.gallery[0]} alt={data.product.name} />
-              <div>
+            <div className="product-detail">
+              <div className="product-detail-images">
+                { data.product.gallery.map((image) => (
+                  <img onClick={() => this.changeImage(image)} className="detail-page-thumnails" src={image} alt={data.product.name} key={nanoid()}/>
+                )) }
+              </div>
+              <img src={ this.state.image || data.product.gallery[0]} alt={data.product.name} className="detail-page-image"/>
+              <div className="detail-page-details">
                 <h3>{data.product.brand}</h3>
                 <h3>{data.product.name}</h3>
                 { data.product.category === 'clothes' && data.product.attributes.length > 0 &&
