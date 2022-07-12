@@ -46,6 +46,12 @@ class Header extends PureComponent {
     }
   }
 
+  itemAddedToCart = () => {
+    setTimeout(() => (
+      <p>Item already in cart</p>
+    ), 3000)
+  }
+
   removeFromCart = (id) => {
     this.setState(prevState => ({
       cartItems: prevState.cartItems.filter(item => item.id !== id)
@@ -203,7 +209,7 @@ class Header extends PureComponent {
           </div>
         </nav>
         { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} /> : ''}
-        { this.state.itemInCart && <p>Item already in cart</p>}
+        { this.state.itemInCart ? <p>Item already in cart</p> : this.itemAddedToCart}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>}/>
