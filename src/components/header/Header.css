@@ -34,6 +34,7 @@ a {
 
 .cart {
   margin-left: 15px;
+  cursor: pointer;
 }
 
 .currency {
@@ -73,6 +74,14 @@ li:hover {
   background-color: #eee;
 }
 
+.itemInCartParagraph {
+  text-align: center;
+  border: 1px solid black;
+  padding: 5px;
+  background-color: #5ECE7B;
+  color: white;
+  font-weight: bold;
+}
 /* select {
   border: none;
   font-size: 18px;

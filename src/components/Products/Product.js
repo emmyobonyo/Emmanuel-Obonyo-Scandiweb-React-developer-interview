@@ -63,16 +63,14 @@ class Product extends PureComponent {
               if (loading) return null;
               return data.category.products.map((product) => (
                 <div key={product.id} className='product-item'>
-                  <Link to={`/product/${product.id}`}>
-                    <div>
-                      <div className='image-div'>
-                        <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} />
-                        { product.attributes.length > 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
-                      </div>
-                      <p>{product.name}</p>
-                      { chooseCurrency(currency, product) }
+                  <div>
+                    <div className='image-div'>
+                    <Link to={`/product/${product.id}`}><img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /></Link>
+                      { product.attributes.length > 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
                     </div>
-                  </Link>
+                    <p>{product.name}</p>
+                    { chooseCurrency(currency, product) }
+                  </div>
                 </div>
               ));
             }}
