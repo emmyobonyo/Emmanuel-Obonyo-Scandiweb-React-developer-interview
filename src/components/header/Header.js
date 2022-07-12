@@ -129,15 +129,18 @@ class Header extends PureComponent {
       onLeaveHover()
 
     }
-    const changeCurrencyOverlay = () => {
+    const changeCurrencyOverlay = (e) => {
       this.setState(prevState => ({
         currencyOverlay: !prevState.currencyOverlay,
       }))
+      if (!e) var e = window.event;
+      e.cancelBubble = true;
+      if (e.stopPropagation) e.stopPropagation();
     }
     console.log(this.state)
     const { currency } = this.state;
     return (
-      <div className='header-div'>
+      <div className='header-div' onClick={this.closeCurrencyOverlay}>
         <nav>
           <div className="nav-ul">
             <Query query={GET_CATEGORIES}>
