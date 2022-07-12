@@ -21,6 +21,7 @@ class Header extends PureComponent {
       currency: localStorage.getItem('symbol') || '$',
       cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]"),
       itemInCart: false,
+      itemAddedToCart: false,
       total: '$',
       cartOverlay: false,
       currencyOverlay: false,
@@ -41,15 +42,13 @@ class Header extends PureComponent {
     } else {
       product.count = 1;
       this.setState(prevState => ({
-        cartItems: [...prevState.cartItems, product]
+        cartItems: [...prevState.cartItems, product],
+        itemAddedToCart: true
       }))
+      setTimeout(() => {
+        this.setState({ itemAddedToCart: false})
+      }, 3000)
     }
-  }
-
-  itemAddedToCart = () => {
-    setTimeout(() => (
-      <p>Item already in cart</p>
-    ), 3000)
   }
 
   removeFromCart = (id) => {
@@ -209,7 +208,7 @@ class Header extends PureComponent {
           </div>
         </nav>
         { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} /> : ''}
-        { this.state.itemInCart ? <p>Item already in cart</p> : this.itemAddedToCart}
+        { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemInCartParagraph'>Item Added to the cart </p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>}/>
