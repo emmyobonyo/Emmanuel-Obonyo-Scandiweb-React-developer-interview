@@ -1,6 +1,7 @@
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
 import Carousel from 'nuka-carousel';
+import '../Products/ProductDetail.css';
 
 class Cart extends PureComponent {
 
@@ -10,131 +11,141 @@ class Cart extends PureComponent {
       if (currency === '$') {
         return (
           <div>
-            <span>{product.prices[0].currency.symbol}</span>
-            <span>{product.prices[0].amount}</span>
+            <span className="product-detail-prices">{product.prices[0].currency.symbol}</span>
+            <span className="product-detail-prices">{product.prices[0].amount}</span>
           </div>
         );
       } else if (currency === '£') {
         return (
           <div>
-            <span>{product.prices[1].currency.symbol}</span>
-            <span>{product.prices[1].amount}</span>
+            <span className="product-detail-prices">{product.prices[1].currency.symbol}</span>
+            <span className="product-detail-prices">{product.prices[1].amount}</span>
           </div>
         )
       } else if (currency == 'A$') {
         return (
           <div>
-            <span>{product.prices[2].currency.symbol}</span>
-            <span>{product.prices[2].amount}</span>
+            <span className="product-detail-prices">{product.prices[2].currency.symbol}</span>
+            <span className="product-detail-prices">{product.prices[2].amount}</span>
           </div>
         )
       } else if (currency == '¥') {
         return (
           <div>
-            <span>{product.prices[3].currency.symbol}</span>
-            <span>{product.prices[3].amount}</span>
+            <span className="product-detail-prices">{product.prices[3].currency.symbol}</span>
+            <span className="product-detail-prices">{product.prices[3].amount}</span>
           </div>
         )
       } else if (currency === '₽') {
         return (
           <div>
-            <span>{product.prices[4].currency.symbol}</span>
-            <span>{product.prices[4].amount}</span>
+            <span className="product-detail-prices">{product.prices[4].currency.symbol}</span>
+            <span className="product-detail-prices">{product.prices[4].amount}</span>
           </div>
         )
       }
       return null;
     };
     return (
-      <div>
-        <h1>Cart</h1>
+      <div className="cart-div-overall">
+        <h1 className="cart-heading">Cart</h1>
        { cartItems.map((item) => (
         <div key={nanoid()}>
-          <hr />
-          <h3>{ item.brand }</h3>
-          <h3>{ item.name }</h3>
           { item.category === 'clothes' && item.attributes.length > 0 &&
-            <div>
-              { item.attributes.map((item) => (
-                <div key={nanoid()}>
-                  <h3>{item.name}</h3>
-                  <div>
-                    {item.items.map((itemAttribute) => (
-                      <span key={nanoid()}>{itemAttribute.value}</span>
-                    ))}
+            <div className="cart-div">
+              <div className="cart-div-item">
+                <h3 className="product-detail-brand">{ item.brand }</h3>
+                <h3 className="product-detail-name">{ item.name }</h3>
+                { item.attributes.map((item) => (
+                  <div key={nanoid()}>
+                    <h4 style={{ marginBottom: 10, marginTop: 40 }}>{`${item.name.toUpperCase()}:`}</h4>
+                    <div>
+                      {item.items.map((itemAttribute) => (
+                        <span className="product-detail-items" key={nanoid()}>{itemAttribute.value}</span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )) }
-              <p>PRICE</p>
-              { chooseCurrency( currency, item) }
-              <button onClick={() => removeFromCart(item.id)}>Delete</button>
-              <div>
-                <button onClick={() => increment(item.id)}>+</button>
-                <span>{item.count}</span>
-                <button onClick={() => decrement(item.id)}>-</button>
+                )) }
+                <h4 style={{marginBottom: 10, marginTop: 30}}>PRICE</h4>
+                { chooseCurrency( currency, item) }
+                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
               </div>
-              { item.gallery.length > 1 &&
-                <Carousel>
-                  { item.gallery.map((image) => (
-                    <img key={nanoid()} src={image} />
-                  )) }
-                </Carousel>
-              }
-              { item.gallery.length < 2 &&
-                <img src={ item.gallery[0] }/>
-              }
+              <div className="cart-div-carousel">
+                <div className="cart-div-carousel-button">
+                  <button className="button" onClick={() => increment(item.id)}>+</button>
+                  <h3>{item.count}</h3>
+                  <button className="button" onClick={() => decrement(item.id)}>-</button>
+                </div>
+                { item.gallery.length > 1 &&
+                  <Carousel>
+                    { item.gallery.map((image) => (
+                      <img key={nanoid()} src={image} className="cart-images" />
+                    )) }
+                  </Carousel>
+                }
+                { item.gallery.length < 2 &&
+                  <img src={ item.gallery[0] }/>
+                }
+                </div>
             </div>
           }
           { item.category === 'tech' && item.attributes.length > 0 &&
-            <div>
-            { item.attributes.map((item) => (
-              <div key={nanoid()}>
-                { item.name === 'Color' &&
-                  <div>
-                    <h3>{item.name}</h3>
+            <div className="cart-div">
+              <div className="cart-div-item">
+                <h3>{ item.brand }</h3>
+                <h3>{ item.name }</h3>
+                { item.attributes.map((item) => (
+                  <div key={nanoid()}>
+                    { item.name === 'Color' &&
+                      <div>
+                        <h3 style={{ marginBottom: 10, marginTop: 40 }}>{`${item.name.toUpperCase()}:`}</h3>
+                        <div>
+                          {item.items.map((value) => (
+                            <span className="swatches" key={nanoid()} style={{ backgroundColor: value.value, }}></span>
+                          ))}
+                        </div>
+                      </div>
+                    }
+                  { item.name === 'Capacity' &&
                     <div>
-                      {item.items.map((value) => (
-                        <span key={nanoid()}>{value.value}</span>
-                      ))}
+                      <h3 style={{ marginBottom: 10, marginTop: 40 }}>{`${item.name.toUpperCase()}:`}</h3>
+                      <div>
+                        {item.items.map((value) => (
+                          <span className="detail-page-capacity" key={nanoid()}>{value.value}</span>
+                        ))}
+                      </div>
                     </div>
-                  </div>
-                }
-                { item.name === 'Capacity' &&
-                  <div>
-                    <h3>{item.name}</h3>
-                    <div>
-                      {item.items.map((value) => (
-                        <span key={nanoid()}>{value.value}</span>
-                      ))}
-                    </div>
-                  </div>
-                }
+                  }
+                </div>
+                )) }
+                <h4>PRICE</h4>
+                { chooseCurrency( currency, item) }
+                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
               </div>
-            )) }
-            <p>PRICE</p>
-            { chooseCurrency( currency, item) }
-            <button onClick={() => removeFromCart(item.id)}>Delete</button>
-              <div>
-                <button onClick={() => increment(item.id)}>+</button>
-                <span>{item.count}</span>
-                <button onClick={() => decrement(item.id)}>-</button>
-              </div>
-              { item.gallery.length > 1 &&
-                <Carousel>
-                  { item.gallery.map((image) => (
-                    <img key={nanoid()} src={image} />
-                  )) }
-                </Carousel>
-              }
-              { item.gallery.length < 2 &&
-                <img src={ item.gallery[0] } />
-              }
-          </div>
+              <div className="cart-div-carousel">
+                <div className="cart-div-carousel-button">
+                  <button className="button" onClick={() => increment(item.id)}>+</button>
+                  <h3>{item.count}</h3>
+                  <button className="button" onClick={() => decrement(item.id)}>-</button>
+                </div>
+                { item.gallery.length > 1 &&
+                  <Carousel>
+                    { item.gallery.map((image) => (
+                      <img key={nanoid()} src={image} className="cart-images"/>
+                    )) }
+                  </Carousel>
+                }
+                { item.gallery.length < 2 &&
+                  <img src={ item.gallery[0] } />
+                }
+                </div>
+            </div>
           }
+           <hr className="horizontal-line"/>
         </div>
       ))}
       <div>
-        <h3>{ total == 0 ? 'You have no items in the cart' : `${ currency } ${total}` }</h3>
+        <h3 style={{marginTop: 100}}>{ total == 0 ? 'You have no items in the cart' : `Total: ${ currency } ${total}` }</h3>
       </div>
       </div>
     )
