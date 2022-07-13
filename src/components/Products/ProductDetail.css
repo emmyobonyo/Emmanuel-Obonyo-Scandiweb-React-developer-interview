@@ -151,6 +151,7 @@
 }
 
 .button-total {
+  width: 25%;
   margin-top: 30px;
   padding: 16px 32px;
   border: none;
