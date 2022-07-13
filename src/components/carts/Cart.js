@@ -6,7 +6,7 @@ import '../Products/ProductDetail.css';
 class Cart extends PureComponent {
 
   render() {
-    const { currency, removeFromCart, cartItems, increment, decrement, total } = this.props;
+    const { currency, removeFromCart, cartItems, increment, decrement, total, quantity } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
@@ -145,8 +145,20 @@ class Cart extends PureComponent {
         </div>
       ))}
       <div>
-        <h3 style={{marginTop: 100}}>{ total == 0 ? 'You have no items in the cart' : `Total: ${ currency } ${total}` }</h3>
+        <div>
+          <h3 className="toal-titles">Tax 21%:</h3>
+          <h3 className="total-titles-2">{`${currency} ${Math.round(0.21 * total * 10)/10} `}</h3>
+        </div>
+        <div>
+          <h3 className="toal-titles">Quantity: </h3>
+          <h3 className="total-titles-2">{ quantity }</h3>
+        </div>
+        <div>
+          <h3 className="toal-titles">Total:</h3>
+          <h3 className="total-titles-2">{ total == 0 ? 'You have no items in the cart' : `${ currency } ${Math.round((total + (0.21 * total))*10)/10}` }</h3>
+        </div>
       </div>
+      <button className="button-total">Order</button>
       </div>
     )
   }
