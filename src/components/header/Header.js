@@ -23,6 +23,7 @@ class Header extends PureComponent {
       itemInCart: false,
       itemAddedToCart: false,
       total: '$',
+      quantity: 0,
       cartOverlay: false,
       currencyOverlay: false,
     };
@@ -106,9 +107,21 @@ class Header extends PureComponent {
      })
   }
 
+  getQuantity = () => {
+    let quantity = 0
+    for(let i = 0; i<this.state.cartItems.length; i++) {
+      const count = this.state.cartItems[i].count
+      quantity += count
+    }
+    this.setState({
+      quantity: quantity
+    })
+  }
+
   render() {
     const { onHover, onLeaveHover } = this.props;
     this.getTotal();
+    this.getQuantity();
     const showCartOverlay = () => {
       this.setState({
         cartOverlay: true,
@@ -213,7 +226,7 @@ class Header extends PureComponent {
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>}/>
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
-          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={closeCurrencyOverlay}/> }/>
+          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={closeCurrencyOverlay} quantity={this.state.quantity}/> }/>
         </Routes>
       </div>
     );
