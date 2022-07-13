@@ -223,7 +223,7 @@ class Header extends PureComponent {
             </div>
           </div>
         </nav>
-        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} /> : ''}
+        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} quantity={this.state.quantity}/> : ''}
         { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemAddedToCart'>Item Added to the cart </p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />

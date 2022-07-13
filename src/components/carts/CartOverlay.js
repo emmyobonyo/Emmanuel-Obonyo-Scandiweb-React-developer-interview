@@ -6,7 +6,7 @@ import './CartOverlay.css';
 class CartOverlay extends PureComponent {
 
   render() {
-    const { currency, removeFromCart, cartItems, increment, decrement, total } = this.props;
+    const { currency, removeFromCart, cartItems, increment, decrement, total, quantity } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
@@ -48,7 +48,8 @@ class CartOverlay extends PureComponent {
     };
     return (
       <div className="cart-overlay-div">
-        <h3>My Bag</h3>
+        <h3>My Bag,</h3>
+        <h3>{ `${quantity} items` }</h3>
        { cartItems.map((item) => (
         <div key={nanoid()}>
           <hr />
