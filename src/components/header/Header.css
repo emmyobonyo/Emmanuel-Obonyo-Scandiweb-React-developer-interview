@@ -78,9 +78,33 @@ li:hover {
   text-align: center;
   border: 1px solid black;
   padding: 5px;
+  background-color: orangered;
+  color: white;
+  font-weight: bold;
+}
+
+.itemAddedToCart {
+  text-align: center;
+  border: 1px solid black;
+  padding: 5px;
   background-color: #5ECE7B;
   color: white;
   font-weight: bold;
+}
+
+.cart-icons {
+  position: relative
+}
+
+.icon-quantity {
+  position: absolute;
+  top: -8px;
+  right: -5px;
+  background-color: black;
+  color: white;
+  padding: 1px 2px;
+  border-radius: 10px;
+  font-size: 12px;
 }
 /* select {
   border: none;

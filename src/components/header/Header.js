@@ -217,11 +217,14 @@ class Header extends PureComponent {
                 }}
               </Query>
             </select> */}
-            <img src={cart} alt="cart" onClick={onMouseEnter} className="cart" />
+            <div className='cart-icons'>
+              {this.state.cartItems.length > 0 && <div className='icon-quantity'>{this.state.quantity}</div>}
+              <img src={cart} alt="cart" onClick={onMouseEnter} className="cart" />
+            </div>
           </div>
         </nav>
         { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} /> : ''}
-        { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemInCartParagraph'>Item Added to the cart </p>}
+        { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemAddedToCart'>Item Added to the cart </p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>}/>
