@@ -48,7 +48,7 @@ class CartOverlay extends PureComponent {
     };
     return (
       <div className="cart-overlay-div">
-        <h1>Cart</h1>
+        <h3>My Bag</h3>
        { cartItems.map((item) => (
         <div key={nanoid()}>
           <hr />
