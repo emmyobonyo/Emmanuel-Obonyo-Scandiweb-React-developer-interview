@@ -217,9 +217,9 @@ class Header extends PureComponent {
                 }}
               </Query>
             </select> */}
-            <div className='cart-icons'>
+            <div className='cart-icons' onClick={onMouseEnter}>
               {this.state.cartItems.length > 0 && <div className='icon-quantity'>{this.state.quantity}</div>}
-              <img src={cart} alt="cart" onClick={onMouseEnter} className="cart" />
+              <img src={cart} alt="cart" className="cart" />
             </div>
           </div>
         </nav>

@@ -93,7 +93,8 @@ li:hover {
 }
 
 .cart-icons {
-  position: relative
+  position: relative;
+  cursor: pointer;
 }
 
 .icon-quantity {
