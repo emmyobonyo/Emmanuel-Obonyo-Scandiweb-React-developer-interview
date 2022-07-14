@@ -141,7 +141,7 @@ class Header extends PureComponent {
         onHover()
       }
     }
-    const closeCurrencyOverlay = () => {
+    const closeCurrencyOverlay = (e) => {
       if( this.state.cartOverlay ) {
         onMouseEnter()
       }
@@ -149,6 +149,9 @@ class Header extends PureComponent {
         currencyOverlay: false,
       })
       console.log('currency')
+      if (!e) var e = window.event;
+      e.cancelBubble = true;
+      if (e.stopPropagation) e.stopPropagation();
     }
     const onClickCartOverlay = (e) => {
       console.log('close')
@@ -233,7 +236,7 @@ class Header extends PureComponent {
             </div>
           </div>
         </nav>
-        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} quantity={this.state.quantity} onClickCartOverlay={onClickCartOverlay}/> : ''}
+        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} quantity={this.state.quantity} onClickCartOverlay={onClickCartOverlay} closeCurrencyOverlay={closeCurrencyOverlay}/> : ''}
         { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemAddedToCart'>Item Added to the cart </p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />

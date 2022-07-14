@@ -1,12 +1,12 @@
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
-import Carousel from 'nuka-carousel';
+import { Link } from 'react-router-dom';
 import './CartOverlay.css';
 
 class CartOverlay extends PureComponent {
 
   render() {
-    const { currency, removeFromCart, cartItems, increment, decrement, total, quantity, onClickCartOverlay } = this.props;
+    const { currency, removeFromCart, cartItems, increment, decrement, total, quantity, onClickCartOverlay, closeCurrencyOverlay } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
@@ -132,7 +132,7 @@ class CartOverlay extends PureComponent {
           <h3>{`${Math.round(total * 10)/10} ${currency}`}</h3>
         </div>
         <div className="cart-overlay-total-buttons">
-          <button className="cart-overlay-total-button button-1">VIEW BACK</button>
+          <Link to='/cart' onClick={closeCurrencyOverlay}><button className="cart-overlay-total-button button-1">VIEW BAG</button></Link>
           <button className="cart-overlay-total-button button-2">CHECK OUT</button>
         </div>
       </div>
