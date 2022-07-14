@@ -54,7 +54,7 @@ Navigate to `http://localhost:4000/` on your browser to ensure that the GraphQl 
 ```
 $ git clone https://github.com/emmyobonyo/emmanuel-obonyo-scandiweb-react-developer-interview.git
 $ cd emmanuel-obonyo-scandiweb-react-developer-interview
-$ cd development
+$ git checkout development
 $ npm install
 $ npm start
 ```
