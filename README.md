@@ -50,9 +50,10 @@ $ npm start
 ```
 Navigate to `http://localhost:4000/` on your browser to ensure that the GraphQl server is up and running.
 
-# Frontend
+# Frontend 
 ```
 $ git clone https://github.com/emmyobonyo/emmanuel-obonyo-scandiweb-react-developer-interview.git
+$ cd emmanuel-obonyo-scandiweb-react-developer-interview
 $ cd development
 $ npm install
 $ npm start
