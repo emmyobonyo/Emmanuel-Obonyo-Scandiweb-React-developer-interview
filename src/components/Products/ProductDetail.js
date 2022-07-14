@@ -20,9 +20,10 @@ class ProductDetail extends PureComponent {
       image: src
     })
   }
+
   render() {
     const { id } = this.props.params;
-    const { currency } = this.props;
+    const { currency, addToCart, closeCurrencyOverlay } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
@@ -72,7 +73,7 @@ class ProductDetail extends PureComponent {
         {({ loading, data}) => {
           if (loading) return null;
           return (
-            <div className="product-detail">
+            <div className="product-detail" onClick={closeCurrencyOverlay}>
               <div className="product-detail-images">
                 { data.product.gallery.map((image) => (
                   <img onClick={() => this.changeImage(image)} className="detail-page-thumnails" src={image} alt={data.product.name} key={nanoid()}/>
@@ -96,7 +97,7 @@ class ProductDetail extends PureComponent {
                     )) }
                     <h4 style={{marginBottom: 10, marginTop: 30}}>PRICE</h4>
                     { chooseCurrency( currency, data.product) }
-                    <button className="detail-page-button" style={{ marginTop: 20, marginBottom: 20}} type="buton">ADD TO CART</button>
+                    <button onClick={() => addToCart(data.product)} className="detail-page-button" style={{ marginTop: 20, marginBottom: 20}} type="buton">ADD TO CART</button>
                     <Interweave content={data.product.description}/>
                   </div>
                 }
@@ -128,7 +129,7 @@ class ProductDetail extends PureComponent {
                   )) }
                   <h4>PRICE</h4>
                   { chooseCurrency( currency, data.product) }
-                  <button className="detail-page-button" style={{ marginTop: 20, marginBottom: 20}} type="buton">ADD TO CART</button>
+                  <button onClick={() => addToCart(data.product)} className="detail-page-button" style={{ marginTop: 20, marginBottom: 20}}>ADD TO CART</button>
                   <Interweave content={data.product.description}/>
                 </div>
                 }

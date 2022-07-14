@@ -26,6 +26,7 @@ class Header extends PureComponent {
       quantity: 0,
       cartOverlay: false,
       currencyOverlay: false,
+      disabled: false,
     };
   }
 
@@ -50,6 +51,7 @@ class Header extends PureComponent {
         this.setState({ itemAddedToCart: false})
       }, 3000)
     }
+    console.log('Add to cart')
   }
 
   removeFromCart = (id) => {
@@ -125,11 +127,13 @@ class Header extends PureComponent {
     const showCartOverlay = () => {
       this.setState({
         cartOverlay: true,
+        disabled: true,
       })
     }
     const hideCartOverlay = () => {
       this.setState({
         cartOverlay: false,
+        disabled: false,
       })
     }
     const onMouseEnter = () => {
@@ -141,13 +145,26 @@ class Header extends PureComponent {
         onHover()
       }
     }
-    const closeCurrencyOverlay = () => {
+    const closeCurrencyOverlay = (e) => {
       if( this.state.cartOverlay ) {
         onMouseEnter()
       }
       this.setState({
         currencyOverlay: false,
       })
+      console.log('currency')
+      if (!e) var e = window.event;
+      e.cancelBubble = true;
+      if (e.stopPropagation) e.stopPropagation();
+    }
+    const onClickCartOverlay = (e) => {
+      console.log('close')
+      this.setState({
+        cartOverlay: true,
+      })
+      if (!e) var e = window.event;
+      e.cancelBubble = true;
+      if (e.stopPropagation) e.stopPropagation();
     }
     const changeCurrencyOverlay = (e) => {
       if (this.state.cartOverlay) {
@@ -217,14 +234,17 @@ class Header extends PureComponent {
                 }}
               </Query>
             </select> */}
-            <img src={cart} alt="cart" onClick={onMouseEnter} className="cart" />
+            <div className='cart-icons' onClick={onMouseEnter}>
+              {this.state.cartItems.length > 0 && <div className='icon-quantity'>{this.state.quantity}</div>}
+              <img src={cart} alt="cart" className="cart" />
+            </div>
           </div>
         </nav>
-        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} /> : ''}
-        { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemInCartParagraph'>Item Added to the cart </p>}
+        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} quantity={this.state.quantity} onClickCartOverlay={onClickCartOverlay} closeCurrencyOverlay={closeCurrencyOverlay}/> : ''}
+        { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemAddedToCart'>Item Added to the cart </p>}
         <Routes>
-          <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
-          <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>}/>
+          <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled}/>} />
+          <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled}/>}/>
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
           <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={closeCurrencyOverlay} quantity={this.state.quantity}/> }/>
         </Routes>
