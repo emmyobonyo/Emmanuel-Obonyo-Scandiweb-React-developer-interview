@@ -45,7 +45,7 @@ Link to [Trello](https://trello.com/b/PbKhb4ok/scandiweb-react-developer-intervi
 $ git clone https://github.com/scandiweb/junior-react-endpoint.git
 $ cd junior-react-endpoint.git
 $ npm install
-$ npm build
+$ npm run build
 $ npm start
 ```
 Navigate to `http://localhost:4000/` on your browser to ensure that the GraphQl server is up and running.
