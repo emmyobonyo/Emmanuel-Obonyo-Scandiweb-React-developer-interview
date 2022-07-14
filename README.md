@@ -43,7 +43,7 @@ Link to [Trello](https://trello.com/b/PbKhb4ok/scandiweb-react-developer-intervi
 # Backend
 ```
 $ git clone https://github.com/scandiweb/junior-react-endpoint.git
-$ cd junior-react-endpoint.git
+$ cd junior-react-endpoint
 $ npm install
 $ npm run build
 $ npm start
