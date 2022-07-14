@@ -9,7 +9,7 @@ import './Product.css'
 class Product extends PureComponent {
   render() {
     const { category } = this.props.params;
-    const { homepage, currency, addToCart, closeCurrencyOverlay } = this.props;
+    const { homepage, currency, addToCart, closeCurrencyOverlay, disabled } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
@@ -65,7 +65,7 @@ class Product extends PureComponent {
                 <div key={product.id} className='product-item'>
                   <div>
                     <div className='image-div'>
-                    <Link to={`/product/${product.id}`}><img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /></Link>
+                      { !disabled ? <Link to={`/product/${product.id}`}><img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /></Link> : <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /> }
                       { product.attributes.length > 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
                     </div>
                     <p>{product.name}</p>
