@@ -6,7 +6,7 @@ import './CartOverlay.css';
 class CartOverlay extends PureComponent {
 
   render() {
-    const { currency, removeFromCart, cartItems, increment, decrement, total, quantity } = this.props;
+    const { currency, removeFromCart, cartItems, increment, decrement, total, quantity, onClickCartOverlay } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
@@ -47,7 +47,7 @@ class CartOverlay extends PureComponent {
       return null;
     };
     return (
-      <div className="cart-overlay-div">
+      <div className="cart-overlay-div" onClick={onClickCartOverlay}>
         { cartItems.length > 0 ?
         <div className="cart-overlay-top">
           <h4 style={{ marginLeft: 10 }}>My Bag,</h4>
