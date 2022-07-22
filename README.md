@@ -2,10 +2,6 @@
 
 > An eCommerce built with React and GraphQL.
 
-Link to [video](https://www.loom.com/share/331fa1f2d80149398db732d3497c253c) walk through.
-
-Link to [Trello](https://trello.com/b/PbKhb4ok/scandiweb-react-developer-interview) board
-
 ### Home Page
 ![Home Page](./public/images/Home.png)
 
