@@ -68,7 +68,6 @@ class Cart extends PureComponent {
                 )) }
                 <h4 style={{marginBottom: 10, marginTop: 30}}>PRICE</h4>
                 { chooseCurrency( currency, item) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
               </div>
               <div className="cart-div-carousel">
                 <div className="cart-div-carousel-button">
@@ -120,7 +119,6 @@ class Cart extends PureComponent {
                 )) }
                 <h4>PRICE</h4>
                 { chooseCurrency( currency, item) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
               </div>
               <div className="cart-div-carousel">
                 <div className="cart-div-carousel-button">
