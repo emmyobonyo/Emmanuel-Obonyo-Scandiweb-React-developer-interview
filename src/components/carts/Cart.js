@@ -68,13 +68,12 @@ class Cart extends PureComponent {
                 )) }
                 <h4 style={{marginBottom: 10, marginTop: 30}}>PRICE</h4>
                 { chooseCurrency( currency, item) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
               </div>
               <div className="cart-div-carousel">
                 <div className="cart-div-carousel-button">
                   <button className="button" onClick={() => increment(item.id)}>+</button>
                   <h3>{item.count}</h3>
-                  <button className="button" onClick={() => decrement(item.id)}>-</button>
+                  <button className="button" onClick={() => decrement(item.id, item.count)}>-</button>
                 </div>
                 { item.gallery.length > 1 &&
                   <Carousel>
@@ -120,13 +119,12 @@ class Cart extends PureComponent {
                 )) }
                 <h4>PRICE</h4>
                 { chooseCurrency( currency, item) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
               </div>
               <div className="cart-div-carousel">
                 <div className="cart-div-carousel-button">
                   <button className="button" onClick={() => increment(item.id)}>+</button>
                   <h3>{item.count}</h3>
-                  <button className="button" onClick={() => decrement(item.id)}>-</button>
+                  <button className="button" onClick={() => decrement(item.id, item.count)}>-</button>
                 </div>
                 { item.gallery.length > 1 &&
                   <Carousel>

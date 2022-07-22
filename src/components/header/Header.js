@@ -76,12 +76,19 @@ class Header extends PureComponent {
     }))
   }
 
-  decrement = (id) => {
-    this.setState(prevState => ({
-      cartItems: prevState.cartItems.map((item) => {
-        return item.id === id ? {...item, count: item.count - 1} : item
-      })
-    }))
+  decrement = (id, count) => {
+    if (count < 2) {
+      this.setState(prevState => ({
+        cartItems: prevState.cartItems.filter(item => item.id !== id)
+      }))
+      localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems))
+    } else {
+      this.setState(prevState => ({
+        cartItems: prevState.cartItems.map((item) => {
+          return item.id === id ? {...item, count: item.count - 1} : item
+        })
+      }))
+    }
   }
 
   getTotal = () => {
@@ -218,22 +225,6 @@ class Header extends PureComponent {
               </ul>
               }
             </div>
-            {/* <Currency /> */}
-            {/* <select onChange={this.onChange} value={localStorage.getItem('symbol') || 'USD'}>
-               <Query query={GET_CURRENCIES}>
-                { ({ loading, data }) => {
-                  if (loading) return null;
-                  return data.currencies.map((currency) => (
-                    <option
-                      key={nanoid()}
-                      value={currency.label}
-                    >
-                      {`${currency.symbol} ${currency.label}`}
-                    </option>
-                  ));
-                }}
-              </Query>
-            </select> */}
             <div className='cart-icons' onClick={onMouseEnter}>
               {this.state.cartItems.length > 0 && <div className='icon-quantity'>{this.state.quantity}</div>}
               <img src={cart} alt="cart" className="cart" />
@@ -241,13 +232,13 @@ class Header extends PureComponent {
           </div>
         </nav>
         <div className={hover ? 'hover' : ''}></div>
-        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} quantity={this.state.quantity} onClickCartOverlay={onClickCartOverlay} closeCurrencyOverlay={closeCurrencyOverlay}/> : ''}
+        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} quantity={this.state.quantity} onClickCartOverlay={onClickCartOverlay} closeCurrencyOverlay={closeCurrencyOverlay}/> : ''}
         { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemAddedToCart'>Item Added to the cart </p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled} />} />
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled} />}/>
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
-          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} removeFromCart={this.removeFromCart} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={closeCurrencyOverlay} quantity={this.state.quantity} /> }/>
+          <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={closeCurrencyOverlay} quantity={this.state.quantity} /> }/>
         </Routes>
       </div>
     );

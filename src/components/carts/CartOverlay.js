@@ -6,7 +6,7 @@ import './CartOverlay.css';
 class CartOverlay extends PureComponent {
 
   render() {
-    const { currency, removeFromCart, cartItems, increment, decrement, total, quantity, onClickCartOverlay, closeCurrencyOverlay } = this.props;
+    const { currency, cartItems, increment, decrement, total, quantity, onClickCartOverlay, closeCurrencyOverlay } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
@@ -71,7 +71,7 @@ class CartOverlay extends PureComponent {
                     </div>
                   </div>
                 )) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
+                {/* <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button> */}
               </div>
               <div className="cart-overlay-buttons-div">
                 <div className="cart-overlay-buttons">
@@ -113,7 +113,7 @@ class CartOverlay extends PureComponent {
                     }
                   </div>
                 )) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
+                {/* <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button> */}
               </div>
               <div className="cart-overlay-buttons-div">
                 <div className="cart-overlay-buttons">
