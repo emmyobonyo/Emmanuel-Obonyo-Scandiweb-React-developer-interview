@@ -71,7 +71,7 @@ class CartOverlay extends PureComponent {
                     </div>
                   </div>
                 )) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
+                {/* <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button> */}
               </div>
               <div className="cart-overlay-buttons-div">
                 <div className="cart-overlay-buttons">
@@ -113,7 +113,7 @@ class CartOverlay extends PureComponent {
                     }
                   </div>
                 )) }
-                <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button>
+                {/* <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button> */}
               </div>
               <div className="cart-overlay-buttons-div">
                 <div className="cart-overlay-buttons">
