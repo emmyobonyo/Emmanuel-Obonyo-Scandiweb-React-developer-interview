@@ -33,11 +33,12 @@ class ProductItem extends PureComponent {
     console.log(this.state.data)
     return (
       this.state.data.map((product) => (
-        <div key={product.id} className='product-item' onMouseEnter={() => this.showAddToCartButton(product.id)} onMouseLeave={() => this.hideAddToCartButton(product.id)}>
+        <Link to={`/product/${product.id}`}>
+          <div key={product.id} className='product-item' onMouseEnter={() => this.showAddToCartButton(product.id)} onMouseLeave={() => this.hideAddToCartButton(product.id)}>
           <div>
             <div className='image-div'>
               { !product.inStock && <div className="out-of-stock-div">OUT OF STOCK</div> }
-              { !disabled ? <Link to={`/product/${product.id}`}><img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /></Link> : <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /> }
+              { !disabled ? <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /> : <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /> }
               { product.attributes.length == 0 && this.state.onHover && product.hover && product.inStock && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
             </div>
             <p className={ !product.inStock ? 'out-of-stock' : "" }>{product.name}</p>
@@ -46,6 +47,7 @@ class ProductItem extends PureComponent {
             {/* Make sure I grey out ths price */}
           </div>
         </div>
+        </Link>
       ))
     )
   }
