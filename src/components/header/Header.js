@@ -76,12 +76,19 @@ class Header extends PureComponent {
     }))
   }
 
-  decrement = (id) => {
-    this.setState(prevState => ({
-      cartItems: prevState.cartItems.map((item) => {
-        return item.id === id ? {...item, count: item.count - 1} : item
-      })
-    }))
+  decrement = (id, count) => {
+    if (count < 2) {
+      this.setState(prevState => ({
+        cartItems: prevState.cartItems.filter(item => item.id !== id)
+      }))
+      localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems))
+    } else {
+      this.setState(prevState => ({
+        cartItems: prevState.cartItems.map((item) => {
+          return item.id === id ? {...item, count: item.count - 1} : item
+        })
+      }))
+    }
   }
 
   getTotal = () => {

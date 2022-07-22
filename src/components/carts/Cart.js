@@ -73,7 +73,7 @@ class Cart extends PureComponent {
                 <div className="cart-div-carousel-button">
                   <button className="button" onClick={() => increment(item.id)}>+</button>
                   <h3>{item.count}</h3>
-                  <button className="button" onClick={() => decrement(item.id)}>-</button>
+                  <button className="button" onClick={() => decrement(item.id, item.count)}>-</button>
                 </div>
                 { item.gallery.length > 1 &&
                   <Carousel>
@@ -124,7 +124,7 @@ class Cart extends PureComponent {
                 <div className="cart-div-carousel-button">
                   <button className="button" onClick={() => increment(item.id)}>+</button>
                   <h3>{item.count}</h3>
-                  <button className="button" onClick={() => decrement(item.id)}>-</button>
+                  <button className="button" onClick={() => decrement(item.id, item.count)}>-</button>
                 </div>
                 { item.gallery.length > 1 &&
                   <Carousel>
