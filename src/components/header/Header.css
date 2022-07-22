@@ -57,21 +57,21 @@ a {
   cursor: pointer;
 }
 
-ul {
+.ul {
   list-style-type: none;
   padding: 0;
   /* margin: 5px 0; */
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 
-li {
+.li {
   padding: 5px 10px;
   margin: 0;
   font-size: 13px;
   font-weight: bold;
 }
 
-li:hover {
+.li:hover {
   background-color: #eee;
 }
 

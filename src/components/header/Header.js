@@ -205,7 +205,7 @@ class Header extends PureComponent {
                   { ({ loading, data }) => {
                     if (loading) return null;
                     return data.currencies.map((currency) => (
-                      <li
+                      <li className='li'
                         key={nanoid()}
                         data-value={currency.symbol}
                         onClick={this.onChange}
