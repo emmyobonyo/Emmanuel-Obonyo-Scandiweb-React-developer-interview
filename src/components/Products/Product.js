@@ -1,9 +1,8 @@
 import { PureComponent } from 'react';
 import { useParams } from 'react-router-dom';
 import { Query } from '@apollo/client/react/components';
-import { Link } from 'react-router-dom';
 import GET_PRODUCTS from '../../graphql/getProducts';
-import Common from '../../assets/images/Common.png'
+import ProductItem from './ProductItem';
 import './Product.css'
 
 class Product extends PureComponent {
@@ -61,21 +60,22 @@ class Product extends PureComponent {
           >
             {({ loading, data }) => {
               if (loading) return null;
-              return data.category.products.map((product) => (
-                <div key={product.id} className='product-item'>
-                  <div>
-                    <div className='image-div'>
-                      { !product.inStock && <div className="out-of-stock-div">OUT OF STOCK</div> }
-                      { !disabled ? <Link to={`/product/${product.id}`}><img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /></Link> : <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /> }
-                      { product.attributes.length == 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
-                    </div>
-                    <p className={ !product.inStock ? 'out-of-stock' : "" }>{product.name}</p>
-                    <p className={ !product.inStock ? 'out-of-stock' : "" }><b>{product.brand}</b></p>
-                    { chooseCurrency(currency, product) } 
-                    {/* Make sure I grey out ths price */}
-                  </div>
-                </div>
-              ));
+              return <ProductItem data={data} disabled={disabled} addToCart={addToCart} chooseCurrency={chooseCurrency} currency={currency}/>
+              // return data.category.products.map((product) => (
+              //   <div key={product.id} className='product-item'>
+              //     <div>
+              //       <div className='image-div'>
+              //         { !product.inStock && <div className="out-of-stock-div">OUT OF STOCK</div> }
+              //         { !disabled ? <Link to={`/product/${product.id}`}><img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /></Link> : <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /> }
+              //         { product.attributes.length == 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
+              //       </div>
+              //       <p className={ !product.inStock ? 'out-of-stock' : "" }>{product.name}</p>
+              //       <p className={ !product.inStock ? 'out-of-stock' : "" }><b>{product.brand}</b></p>
+              //       { chooseCurrency(currency, product) }
+              //       {/* Make sure I grey out ths price */}
+              //     </div>
+              //   </div>
+              // ));
             }}
           </Query>
         </div>
