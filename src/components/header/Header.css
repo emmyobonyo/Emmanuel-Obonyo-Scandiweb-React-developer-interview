@@ -4,6 +4,7 @@ nav {
   align-items: center;
   padding: 20px 100px;
   background-color: white;
+  overflow: hidden;
 }
 
 a {
@@ -110,6 +111,21 @@ li:hover {
   height: 15px;
   text-align: center;
   font-size: 12px;
+}
+
+.hover {
+  position: absolute;
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: rgba(57, 55, 72, 0.22);
+}
+
+.header-div {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 /* select {
   border: none;

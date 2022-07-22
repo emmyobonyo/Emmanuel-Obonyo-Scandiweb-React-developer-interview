@@ -1,6 +1,7 @@
 .products {
   max-width: 80%;
   margin: auto;
+  margin-bottom: 100px;
 }
 
 .product-items {
@@ -41,4 +42,3 @@
   right: 30px;
   width: 10%;
 }
-

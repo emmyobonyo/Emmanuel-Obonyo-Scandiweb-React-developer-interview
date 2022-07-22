@@ -9,7 +9,7 @@ import './Product.css'
 class Product extends PureComponent {
   render() {
     const { category } = this.props.params;
-    const { homepage, currency, addToCart, closeCurrencyOverlay, disabled } = this.props;
+    const { homepage, currency, addToCart, closeCurrencyOverlay, disabled, hover } = this.props;
     const chooseCurrency = (currency, product) => {
       if (currency === '$') {
         return (
