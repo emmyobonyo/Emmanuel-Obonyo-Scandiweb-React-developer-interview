@@ -65,12 +65,14 @@ class Product extends PureComponent {
                 <div key={product.id} className='product-item'>
                   <div>
                     <div className='image-div'>
+                      { !product.inStock && <div className="out-of-stock-div">OUT OF STOCK</div> }
                       { !disabled ? <Link to={`/product/${product.id}`}><img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /></Link> : <img className='product-image' src={product.gallery[0]} alt={`${product.name}`} /> }
                       { product.attributes.length == 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
                     </div>
-                    <p>{product.name}</p>
-                    <p><b>{product.brand}</b></p>
-                    { chooseCurrency(currency, product) }
+                    <p className={ !product.inStock ? 'out-of-stock' : "" }>{product.name}</p>
+                    <p className={ !product.inStock ? 'out-of-stock' : "" }><b>{product.brand}</b></p>
+                    { chooseCurrency(currency, product) } 
+                    {/* Make sure I grey out ths price */}
                   </div>
                 </div>
               ));

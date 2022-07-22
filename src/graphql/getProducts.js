@@ -5,6 +5,7 @@ query category($input: CategoryInput!) {
   category(input: $input) {
     products {
       id
+      inStock
       name
       gallery
       brand

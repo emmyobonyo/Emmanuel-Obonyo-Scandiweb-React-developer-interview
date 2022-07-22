@@ -43,3 +43,20 @@
   right: 30px;
   width: 10%;
 }
+
+.out-of-stock {
+  color: #8D8F9A
+}
+
+.out-of-stock-div {
+  position: absolute;
+  width: 100%;
+  background-color: white;
+  opacity: 0.5;
+  color: #8D8F9A;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
