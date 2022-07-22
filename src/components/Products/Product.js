@@ -69,6 +69,7 @@ class Product extends PureComponent {
                       { product.attributes.length == 0 && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
                     </div>
                     <p>{product.name}</p>
+                    <p><b>{product.brand}</b></p>
                     { chooseCurrency(currency, product) }
                   </div>
                 </div>
