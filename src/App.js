@@ -31,10 +31,10 @@ class App extends PureComponent {
 
   render() {
     return (
-      <div className={ this.state.hover? 'body': 'hover' }>
+      <div className='body'>
         <ApolloProvider client={client}>
-        <Header onHover={this.onHover} onLeaveHover={this.onLeaveHover}/>
-      </ApolloProvider>
+          <Header onHover={this.onHover} onLeaveHover={this.onLeaveHover} hover={this.state.hover}/>
+        </ApolloProvider>
       </div>
     );
   }

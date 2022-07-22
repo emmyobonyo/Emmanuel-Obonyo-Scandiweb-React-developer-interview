@@ -2,16 +2,20 @@ body {
   margin: 0;
 }
 
-.body {
-  padding: 0;
+/* .hover {
+  position: absolute;
+  top: 85px;
+  z-index: 1;
+  height: 220%;
+  overflow-y: auto;
+  width: 100%;
   font-family: 'Raleway', sans-serif;
   background-color: rgba(57, 55, 72, 0.22);
   padding: 0 0 100px 0;
-}
+} */
 
-.hover {
+.body {
   padding: 0;
   font-family: 'Raleway', sans-serif;
   background-color: white;
-  padding: 0 0 100px 0;
 }
