@@ -7,6 +7,9 @@
 
 .product-detail-images {
   width: 10%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .detail-page-image {
@@ -18,9 +21,11 @@
 }
 
 .detail-page-thumnails {
+  display: flex;
   max-width: 100%;
   height: 100px;
   cursor: pointer;
+  margin-bottom: 25px;
 }
 
 .product-detail-items {
