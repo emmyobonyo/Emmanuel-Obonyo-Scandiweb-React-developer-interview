@@ -10,8 +10,8 @@ import cart from '../../assets/images/cart.png';
 import GET_CURRENCIES from '../../graphql/getCurrencies';
 import Cart from '../carts/Cart';
 import CartOverlay from '../carts/CartOverlay';
-import downIcon from '../../assets/images/down.png'
-import upIcon from '../../assets/images/up.png'
+import downIcon from '../../assets/images/down.png';
+import upIcon from '../../assets/images/up.png';
 import './Header.css';
 
 class Header extends PureComponent {
@@ -51,7 +51,6 @@ class Header extends PureComponent {
         this.setState({ itemAddedToCart: false})
       }, 3000)
     }
-    console.log('Add to cart')
   }
 
   removeFromCart = (id) => {
