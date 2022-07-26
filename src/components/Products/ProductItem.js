@@ -43,7 +43,11 @@ class ProductItem extends PureComponent {
             </div>
             <p className={ !product.inStock ? 'out-of-stock' : "" }>{product.name}</p>
             <p className={ !product.inStock ? 'out-of-stock' : "" }><b>{product.brand}</b></p>
-            { chooseCurrency(currency, product) }
+            <div className="product-price">
+              <span>{currency}</span>
+              <span>100</span>
+            </div>
+            {/* { chooseCurrency(currency, product) } */}
             {/* Make sure I grey out ths price */}
           </div>
         </div>
