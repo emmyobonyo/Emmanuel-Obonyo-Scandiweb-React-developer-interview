@@ -4,6 +4,7 @@ import { Query } from '@apollo/client/react/components';
 import { nanoid } from 'nanoid';
 import { Interweave } from 'interweave';
 import GET_PRODUCT from "../../graphql/getProduct";
+import ChangeCurrencyLogic from "./changeCurrencyLogic";
 import './ProductDetail.css'
 
 
@@ -24,45 +25,6 @@ class ProductDetail extends PureComponent {
   render() {
     const { id } = this.props.params;
     const { currency, addToCart, closeCurrencyOverlay } = this.props;
-    const chooseCurrency = (currency, product) => {
-      if (currency === '$') {
-        return (
-          <div>
-            <span className="product-detail-prices">{product.prices[0].currency.symbol}</span>
-            <span className="product-detail-prices">{product.prices[0].amount}</span>
-          </div>
-        );
-      } else if (currency === '£') {
-        return (
-          <div>
-            <span className="product-detail-prices">{product.prices[1].currency.symbol}</span>
-            <span className="product-detail-prices">{product.prices[1].amount}</span>
-          </div>
-        )
-      } else if (currency === 'A$') {
-        return (
-          <div>
-            <span className="product-detail-prices">{product.prices[2].currency.symbol}</span>
-            <span className="product-detail-prices">{product.prices[2].amount}</span>
-          </div>
-        )
-      } else if (currency === '¥') {
-        return (
-          <div>
-            <span className="product-detail-prices">{product.prices[3].currency.symbol}</span>
-            <span className="product-detail-prices">{product.prices[3].amount}</span>
-          </div>
-        )
-      } else if (currency === '₽') {
-        return (
-          <div>
-            <span className="product-detail-prices">{product.prices[4].currency.symbol}</span>
-            <span className="product-detail-prices">{product.prices[4].amount}</span>
-          </div>
-        )
-      }
-      return null;
-    };
     return (
       <Query
         key="yes"
@@ -96,7 +58,7 @@ class ProductDetail extends PureComponent {
                       </div>
                     )) }
                     <h4 style={{marginBottom: 10, marginTop: 30}}>PRICE</h4>
-                    { chooseCurrency( currency, data.product) }
+                    <ChangeCurrencyLogic currency={currency} id={id}/>
                     <button onClick={() => addToCart(data.product)} className="detail-page-button" style={{ marginTop: 20, marginBottom: 20}} type="buton">ADD TO CART</button>
                     <Interweave content={data.product.description}/>
                   </div>
@@ -128,7 +90,7 @@ class ProductDetail extends PureComponent {
                     </div>
                   )) }
                   <h4>PRICE</h4>
-                  { chooseCurrency( currency, data.product) }
+                  <ChangeCurrencyLogic currency={currency} id={id}/>
                   <button onClick={() => addToCart(data.product)} className="detail-page-button" style={{ marginTop: 20, marginBottom: 20}}>ADD TO CART</button>
                   <Interweave content={data.product.description}/>
                 </div>
