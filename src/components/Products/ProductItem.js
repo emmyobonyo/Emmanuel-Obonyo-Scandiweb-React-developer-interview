@@ -33,7 +33,7 @@ class ProductItem extends PureComponent {
     console.log(this.state.data)
     return (
       this.state.data.map((product) => (
-        <Link to={`/product/${product.id}`}>
+        <Link to={`/product/${product.id}`} key={product.id}>
           <div key={product.id} className='product-item' onMouseEnter={() => this.showAddToCartButton(product.id)} onMouseLeave={() => this.hideAddToCartButton(product.id)}>
           <div>
             <div className='image-div'>
