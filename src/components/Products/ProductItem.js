@@ -29,7 +29,7 @@ class ProductItem extends PureComponent {
   }
 
   render() {
-    const { disabled, addToCart, chooseCurrency, currency } = this.props;
+    const { disabled, addToCart, currency } = this.props;
     console.log(this.state.data)
     return (
       this.state.data.map((product) => (

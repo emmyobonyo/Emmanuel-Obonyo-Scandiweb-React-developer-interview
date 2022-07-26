@@ -9,45 +9,6 @@ class Product extends PureComponent {
   render() {
     const { category } = this.props.params;
     const { homepage, currency, addToCart, closeCurrencyOverlay, disabled } = this.props;
-    // const chooseCurrency = (currency, product) => {
-    //   if (currency === '$') {
-    //     return (
-    //       <div className="product-price">
-    //         <span>{product.prices[0].currency.symbol}</span>
-    //         <span>{product.prices[0].amount}</span>
-    //       </div>
-    //     );
-    //   } else if (currency === '£') {
-    //     return (
-    //       <div className="product-price">
-    //         <span>{product.prices[1].currency.symbol}</span>
-    //         <span>{product.prices[1].amount}</span>
-    //       </div>
-    //     )
-    //   } else if (currency == 'A$') {
-    //     return (
-    //       <div className="product-price">
-    //         <span>{product.prices[2].currency.symbol}</span>
-    //         <span>{product.prices[2].amount}</span>
-    //       </div>
-    //     )
-    //   } else if (currency == '¥') {
-    //     return (
-    //       <div className="product-price">
-    //         <span>{product.prices[3].currency.symbol}</span>
-    //         <span>{product.prices[3].amount}</span>
-    //       </div>
-    //     )
-    //   } else if (currency === '₽') {
-    //     return (
-    //       <div className="product-price">
-    //         <span>{product.prices[4].currency.symbol}</span>
-    //         <span>{product.prices[4].amount}</span>
-    //       </div>
-    //     )
-    //   }
-    //   return null;
-    // };
     return (
       <div className='products' onClick={()=>closeCurrencyOverlay()}>
         <h1 className='category'>{!homepage ? category : homepage}</h1>

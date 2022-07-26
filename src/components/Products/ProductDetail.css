@@ -34,10 +34,6 @@
   border: 2px solid black;
 }
 
-.product-detail-prices {
-  font-weight: bold;
-}
-
 .product-detail-name {
   font-weight: lighter;
   margin-top: 0 !important;
