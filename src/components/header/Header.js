@@ -67,40 +67,41 @@ class Header extends PureComponent {
     this.setState({ currency: dataset.value, currencyOverlay: false});
   }
 
-  increment = (id) => {
+  getTotal = () => {
+    let total = 0
+    this.state.cartItems.map((item) => {
+      item.prices.map((price) => {
+        if(price.currency.symbol == this.state.currency){
+          total += price.amount * item.count
+        }
+      })
+    })
+    this.setState({
+      total: total
+    })
+  }
+
+  increment = (items) => {
     this.setState(prevState => ({
       cartItems: prevState.cartItems.map((item) => {
-        return item.id === id ? {...item, count: item.count + 1} : item
+        return item.attributes === items.attributes ? {...item, count: item.count + 1} : item
       })
     }))
   }
 
-  decrement = (id, count) => {
+  decrement = (items, count) => {
     if (count < 2) {
       this.setState(prevState => ({
-        cartItems: prevState.cartItems.filter(item => item.id !== id)
+        cartItems: prevState.cartItems.filter(item => item.attributes !== items.attributes)
       }))
       localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems))
     } else {
       this.setState(prevState => ({
         cartItems: prevState.cartItems.map((item) => {
-          return item.id === id ? {...item, count: item.count - 1} : item
+          return item.attributes === items.attributes ? {...item, count: item.count - 1} : item
         })
       }))
     }
-  }
-
-  getTotal = () => {
-    let total = 0
-    for(let i = 0; i<this.state.cartItems.length; i++){
-      for(let j = 0; i<this.state.cartItems[i].prices.length; i++) {
-        const price = this.state.cartItems[i].prices[j].amount
-        total += price;
-      }
-    }
-    this.setState({
-      total: total
-    })
   }
 
   getQuantity = () => {
@@ -115,6 +116,7 @@ class Header extends PureComponent {
   }
 
   render() {
+    console.log(this.state)
     const { onHover, onLeaveHover, hover} = this.props;
     this.getTotal();
     this.getQuantity();
