@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import ProductComponent from './ProductComponent';
+import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
 import Common from '../../assets/images/Common.png';
 
@@ -34,7 +35,7 @@ class ProductItem extends PureComponent {
     console.log(this.state.data)
     return (
       this.state.data.map((product) => (
-        <div>
+        <div key={nanoid()}>
           { !product.inStock ?
           <div>
             <ProductComponent product={product} disabled={disabled} currency={currency} showAddToCartButton={this.showAddToCartButton} hideAddToCartButton={this.hideAddToCartButton}/>
