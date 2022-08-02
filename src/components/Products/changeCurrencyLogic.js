@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import { Query } from '@apollo/client/react/components';
+import { nanoid } from 'nanoid';
 import GET_PRODUCT from '../../graphql/getProduct';
 
 class ChangeCurrencyLogic extends PureComponent {
@@ -17,14 +18,14 @@ class ChangeCurrencyLogic extends PureComponent {
           return (
             <div>
               {data.product.prices.map((price) => (
-                <>
+                <div key={nanoid()}>
                   {price.currency.symbol == currency &&
                   <div className="product-price">
                     <span>{currency}</span>
                     <span>{price.amount}</span>
                   </div>
                   }
-                </>
+                </div>
               ))}
             </div>
           )

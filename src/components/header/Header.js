@@ -35,7 +35,7 @@ class Header extends PureComponent {
   }
 
   addToCart = (product) => {
-    const alreadyInCart = this.state.cartItems.some(item => item.id === product.id)
+    const alreadyInCart = this.state.cartItems.some(item => item.attributes === product.attributes)
     if( alreadyInCart ) {
       this.setState({ itemInCart: true })
       setTimeout(() => {
