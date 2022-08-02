@@ -37,11 +37,15 @@
   position: relative;
 }
 
+.add-to-cart-product-div {
+  position: relative;
+}
+
 .add-to-cart-button {
   position: absolute;
-  bottom: -15px;
   right: 30px;
-  width: 10%;
+  top: 280px;
+  z-index: 1;
 }
 
 .out-of-stock {

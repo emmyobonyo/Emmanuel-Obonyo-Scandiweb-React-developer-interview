@@ -1,6 +1,7 @@
 import { PureComponent } from 'react';
 import ProductComponent from './ProductComponent';
 import { Link } from 'react-router-dom';
+import Common from '../../assets/images/Common.png';
 
 class ProductItem extends PureComponent {
   constructor(props) {
@@ -34,7 +35,17 @@ class ProductItem extends PureComponent {
     return (
       this.state.data.map((product) => (
         <div>
-          { !product.inStock ? <ProductComponent product={product} disabled={disabled} currency={currency} addToCart={addToCart} showAddToCartButton={this.showAddToCartButton} hideAddToCartButton={this.hideAddToCartButton} onHover={this.state.onHover}/> : <Link to={`/product/${product.id}`}><ProductComponent product={product} disabled={disabled} currency={currency} addToCart={addToCart} showAddToCartButton={this.showAddToCartButton} hideAddToCartButton={this.hideAddToCartButton} onHover={this.state.onHover}/></Link>}
+          { !product.inStock ?
+          <div>
+            <ProductComponent product={product} disabled={disabled} currency={currency} showAddToCartButton={this.showAddToCartButton} hideAddToCartButton={this.hideAddToCartButton}/>
+            { product.attributes.length == 0 && this.state.onHover && product.hover && product.inStock && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
+          </div>
+          :
+          <div className="add-to-cart-product-div" onMouseEnter={() => this.showAddToCartButton(product.id)} onMouseLeave={() => this.hideAddToCartButton(product.id)}>
+            <Link to={`/product/${product.id}`}><ProductComponent product={product} disabled={disabled} currency={currency} showAddToCartButton={this.showAddToCartButton} hideAddToCartButton={this.hideAddToCartButton} /></Link>
+            { product.attributes.length == 0 && this.state.onHover && product.hover && product.inStock && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
+          </div>
+          }
         </div>
       ))
     )
