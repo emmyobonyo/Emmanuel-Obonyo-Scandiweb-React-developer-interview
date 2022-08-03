@@ -67,52 +67,39 @@ class Header extends PureComponent {
     this.setState({ currency: dataset.value, currencyOverlay: false});
   }
 
-  increment = (id) => {
+  getTotal = () => {
+    let total = 0
+    this.state.cartItems.map((item) => {
+      return item.prices.map((price) => {
+        return price.currency.symbol === this.state.currency ? total += price.amount * item.count : total
+      })
+    })
+    this.setState({
+      total: total
+    })
+  }
+
+  increment = (items) => {
     this.setState(prevState => ({
       cartItems: prevState.cartItems.map((item) => {
-        return item.id === id ? {...item, count: item.count + 1} : item
+        return item.attributes === items.attributes ? {...item, count: item.count + 1} : item
       })
     }))
   }
 
-  decrement = (id, count) => {
+  decrement = (items, count) => {
     if (count < 2) {
       this.setState(prevState => ({
-        cartItems: prevState.cartItems.filter(item => item.id !== id)
+        cartItems: prevState.cartItems.filter(item => item.attributes !== items.attributes)
       }))
       localStorage.setItem("cartItems", JSON.stringify(this.state.cartItems))
     } else {
       this.setState(prevState => ({
         cartItems: prevState.cartItems.map((item) => {
-          return item.id === id ? {...item, count: item.count - 1} : item
+          return item.attributes === items.attributes ? {...item, count: item.count - 1} : item
         })
       }))
     }
-  }
-
-  getTotal = () => {
-    let total = 0
-    for(let i = 0; i<this.state.cartItems.length; i++) {
-      if (this.state.currency === '$') {
-        const price = this.state.cartItems[i].prices[0].amount * this.state.cartItems[i].count
-        total += price
-      } else if (this.state.currency === '£') {
-        const price = this.state.cartItems[i].prices[1].amount * this.state.cartItems[i].count
-        total += price
-      } else if (this.state.currency == 'A$') {
-        const price = this.state.cartItems[i].prices[2].amount * this.state.cartItems[i].count
-        total += price
-      } else if (this.state.currency == '¥') {
-        const price = this.state.cartItems[i].prices[3].amount * this.state.cartItems[i].count
-        total += price
-      } else if (this.state.currency === '₽') {
-        const price = this.state.cartItems[i].prices[4].amount * this.state.cartItems[i].count
-        total += price
-      }
-    }
-     this.setState({
-      total: total
-     })
   }
 
   getQuantity = () => {
@@ -126,31 +113,35 @@ class Header extends PureComponent {
     })
   }
 
+  showCartOverlay = () => {
+    this.setState({
+      cartOverlay: true,
+      disabled: true,
+    })
+  }
+
+  hideCartOverlay = () => {
+    this.setState({
+      cartOverlay: false,
+      disabled: false,
+    })
+  }
+
   render() {
     const { onHover, onLeaveHover, hover} = this.props;
     this.getTotal();
     this.getQuantity();
-    const showCartOverlay = () => {
-      this.setState({
-        cartOverlay: true,
-        disabled: true,
-      })
-    }
-    const hideCartOverlay = () => {
-      this.setState({
-        cartOverlay: false,
-        disabled: false,
-      })
-    }
+
     const onMouseEnter = () => {
       if (this.state.cartOverlay) {
-        hideCartOverlay()
+        this.hideCartOverlay()
         onLeaveHover()
       } else {
-        showCartOverlay()
+        this.showCartOverlay()
         onHover()
       }
     }
+
     const closeCurrencyOverlay = (e) => {
       if( this.state.cartOverlay ) {
         onMouseEnter()
@@ -159,19 +150,21 @@ class Header extends PureComponent {
         currencyOverlay: false,
       })
       console.log('currency')
-      if (!e) var e = window.event;
+      if (!e) e = window.event;
       e.cancelBubble = true;
       if (e.stopPropagation) e.stopPropagation();
     }
+
     const onClickCartOverlay = (e) => {
       console.log('close')
       this.setState({
         cartOverlay: true,
       })
-      if (!e) var e = window.event;
+      if (!e) e = window.event;
       e.cancelBubble = true;
       if (e.stopPropagation) e.stopPropagation();
     }
+
     const changeCurrencyOverlay = (e) => {
       if (this.state.cartOverlay) {
         onMouseEnter()
@@ -179,11 +172,11 @@ class Header extends PureComponent {
       this.setState(prevState => ({
         currencyOverlay: !prevState.currencyOverlay,
       }))
-      if (!e) var e = window.event;
+      if (!e) e = window.event;
       e.cancelBubble = true;
       if (e.stopPropagation) e.stopPropagation();
     }
-    console.log(this.state)
+
     const { currency } = this.state;
     return (
       <div className='header-div' onClick={closeCurrencyOverlay}>
@@ -203,7 +196,7 @@ class Header extends PureComponent {
             <div className='currency-div'>
               <div onClick={changeCurrencyOverlay}>
                 <span><b>{ `${ this.state.currency }` }</b></span>
-                <img className='currency-icon' src={ this.state.currencyOverlay ? downIcon : upIcon }/>
+                <img className='currency-icon' src={ this.state.currencyOverlay ? downIcon : upIcon } alt="currency icon"/>
               </div>
               { this.state.currencyOverlay &&
               <ul className='ul'>
@@ -231,7 +224,7 @@ class Header extends PureComponent {
           </div>
         </nav>
         <div className={hover ? 'hover' : ''}></div>
-        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={showCartOverlay} quantity={this.state.quantity} onClickCartOverlay={onClickCartOverlay} closeCurrencyOverlay={closeCurrencyOverlay}/> : ''}
+        { this.state.cartOverlay ?  <CartOverlay cartItems={this.state.cartItems} currency={currency} increment={this.increment} decrement={this.decrement} total={this.state.total} onMouseOver={this.showCartOverlay} quantity={this.state.quantity} onClickCartOverlay={onClickCartOverlay} closeCurrencyOverlay={closeCurrencyOverlay}/> : ''}
         { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemAddedToCart'>Item Added to the cart </p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled} />} />
