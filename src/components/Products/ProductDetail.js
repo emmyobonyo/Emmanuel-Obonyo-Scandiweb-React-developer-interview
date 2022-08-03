@@ -1,3 +1,4 @@
+/* eslint-disable import/no-anonymous-default-export */
 import { PureComponent } from "react";
 import { useParams } from 'react-router-dom';
 import { Query } from '@apollo/client/react/components';

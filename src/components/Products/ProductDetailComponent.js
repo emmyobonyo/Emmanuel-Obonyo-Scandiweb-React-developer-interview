@@ -1,3 +1,5 @@
+/* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable array-callback-return */
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
 import ChangeCurrencyLogic from "./changeCurrencyLogic";
