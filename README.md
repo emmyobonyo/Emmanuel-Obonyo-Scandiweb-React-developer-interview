@@ -15,7 +15,7 @@
 ![Currency Page](./public/images/currency.png)
 
 ### Cart Overlay
-![Cart](./public/images/cart.png)
+![Cart](./public/images/carts.png)
 
 ### Product Detail
 ![Product Details](./public/images/productDetail.png)
