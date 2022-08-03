@@ -14,7 +14,7 @@ class ProductItem extends PureComponent {
   }
 
   showAddToCartButton = (id) => {
-    const product = this.state.data.filter(item => item.id == id)
+    const product = this.state.data.filter(item => item.id === id)
     product[0].hover = true;
     console.log(product[0].hover)
     this.setState({
@@ -23,7 +23,7 @@ class ProductItem extends PureComponent {
   }
 
   hideAddToCartButton = (id) => {
-    const product = this.state.data.filter(item => item.id == id)
+    const product = this.state.data.filter(item => item.id === id)
     product[0].hover = false;
     this.setState({
       onHover: false,
@@ -38,12 +38,12 @@ class ProductItem extends PureComponent {
           { !product.inStock ?
           <div>
             <ProductComponent product={product} disabled={disabled} currency={currency} showAddToCartButton={this.showAddToCartButton} hideAddToCartButton={this.hideAddToCartButton}/>
-            { product.attributes.length == 0 && this.state.onHover && product.hover && product.inStock && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
+            { product.attributes.length === 0 && this.state.onHover && product.hover && product.inStock && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
           </div>
           :
           <div className="add-to-cart-product-div" onMouseEnter={() => this.showAddToCartButton(product.id)} onMouseLeave={() => this.hideAddToCartButton(product.id)}>
             <Link to={`/product/${product.id}`}><ProductComponent product={product} disabled={disabled} currency={currency} showAddToCartButton={this.showAddToCartButton} hideAddToCartButton={this.hideAddToCartButton} /></Link>
-            { product.attributes.length == 0 && this.state.onHover && product.hover && product.inStock && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
+            { product.attributes.length === 0 && this.state.onHover && product.hover && product.inStock && <img src={Common} alt="add-to-cart" onClick={() => addToCart(product)} className='add-to-cart-button'/>}
           </div>
           }
         </div>
