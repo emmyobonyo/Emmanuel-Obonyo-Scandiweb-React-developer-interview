@@ -5,7 +5,7 @@ class CarouselItem extends PureComponent {
     const { image } = this.props;
     return (
       <div className="carousel-item">
-        <img src={image} className="cart-images"/>
+        <img src={image} className="cart-images" alt="carousel"/>
       </div>
     )
   }

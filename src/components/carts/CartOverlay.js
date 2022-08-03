@@ -1,51 +1,13 @@
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
 import { Link } from 'react-router-dom';
+import ChangeCurrencyLogic from "../Products/changeCurrencyLogic";
 import './CartOverlay.css';
 
 class CartOverlay extends PureComponent {
 
   render() {
     const { currency, cartItems, increment, decrement, total, quantity, onClickCartOverlay, closeCurrencyOverlay } = this.props;
-    const chooseCurrency = (currency, product) => {
-      if (currency === '$') {
-        return (
-          <div>
-            <h4 className="cart-overlay-prices">{product.prices[0].currency.symbol}</h4>
-            <h4 className="cart-overlay-prices">{product.prices[0].amount}</h4>
-          </div>
-        );
-      } else if (currency === '£') {
-        return (
-          <div>
-            <h4 className="cart-overlay-prices">{product.prices[1].currency.symbol}</h4>
-            <h4 className="cart-overlay-prices">{product.prices[1].amount}</h4>
-          </div>
-        )
-      } else if (currency == 'A$') {
-        return (
-          <div>
-            <h4 className="cart-overlay-prices">{product.prices[2].currency.symbol}</h4>
-            <h4 className="cart-overlay-prices">{product.prices[2].amount}</h4>
-          </div>
-        )
-      } else if (currency == '¥') {
-        return (
-          <div>
-            <h4 className="cart-overlay-prices">{product.prices[3].currency.symbol}</h4>
-            <h4 className="cart-overlay-prices">{product.prices[3].amount}</h4>
-          </div>
-        )
-      } else if (currency === '₽') {
-        return (
-          <div>
-            <h4 className="cart-overlay-prices">{product.prices[4].currency.symbol}</h4>
-            <h4 className="cart-overlay-prices">{product.prices[4].amount}</h4>
-          </div>
-        )
-      }
-      return null;
-    };
     return (
       <div className="cart-overlay-div" onClick={onClickCartOverlay}>
         { cartItems.length > 0 ?
@@ -55,76 +17,34 @@ class CartOverlay extends PureComponent {
         </div> : <h3>You have no items in your cart</h3> }
        { cartItems.map((item) => (
         <div key={nanoid()}>
-          { item.category === 'clothes' && item.attributes.length > 0 &&
-            <div className="cart-overlay-sections">
-              <div className="cart-overlay-sections-1">
-                <h4 className="cart-overlay-brand">{ item.brand }</h4>
-                <h4 className="cart-overlay-name">{ item.name }</h4>
-                { chooseCurrency( currency, item) }
-                { item.attributes.map((item) => (
-                  <div key={nanoid()}>
-                    <h4 style={{marginTop: 0}}>{`${item.name}:`}</h4>
-                    <div>
-                      {item.items.map((itemAttribute) => (
-                        <span className="product-detail-items" key={nanoid()}>{itemAttribute.value}</span>
-                      ))}
+          <div className="cart-overlay-sections">
+            <div className="cart-overlay-sections-1">
+              <h4 className="cart-overlay-brand">{ item.brand }</h4>
+              <h4 className="cart-overlay-name">{ item.name }</h4>
+              <ChangeCurrencyLogic id={item.id} currency={currency}/>
+              { item.attributes.map((item) => (
+                <div key={nanoid()}>
+                  <h4 style={{ marginTop: 20 }}>{`${item.name}:`}</h4>
+                  <div>
+                    { item.items.map((itemAttribute) => (
+                      <div className="itemAttribute-items" key={nanoid()}>
+                      { item.name === "Color" && <span className={ itemAttribute.clicked ? "swatches-clicked" : "swatches-cart"} style={{ backgroundColor: itemAttribute.value, }}></span>}
+                      { !(item.name === "Color") &&<span className={ itemAttribute.clicked ? "product-detail-items-cart-clicked" : "product-detail-items-cart"}>{itemAttribute.value}</span>}
                     </div>
+                    )) }
                   </div>
-                )) }
-                {/* <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button> */}
-              </div>
-              <div className="cart-overlay-buttons-div">
-                <div className="cart-overlay-buttons">
-                  <button className="cart-overlay-button" onClick={() => increment(item.id)}>+</button>
-                  <span>{item.count}</span>
-                  <button className="cart-overlay-button" onClick={() => decrement(item.id)}>-</button>
                 </div>
-                <img src={item.gallery[0]} className="cart-overlay-image"/>
-              </div>
+              )) }
             </div>
-          }
-          { item.category === 'tech' && item.attributes.length > 0 &&
-            <div className="cart-overlay-sections">
-              <div className="cart-overlay-sections-1">
-                <h4 className="cart-overlay-brand">{ item.brand }</h4>
-                <h4 className="cart-overlay-name">{ item.name }</h4>
-                { chooseCurrency( currency, item) }
-                { item.attributes.map((item) => (
-                  <div key={nanoid()}>
-                    { item.name === 'Color' &&
-                      <div>
-                        <h4>{`${item.name}:`}</h4>
-                        <div>
-                          {item.items.map((value) => (
-                            <span className="swatches" key={nanoid()} style={{ backgroundColor: value.value, }}></span>
-                          ))}
-                        </div>
-                      </div>
-                    }
-                    { item.name === 'Capacity' &&
-                      <div>
-                        <h3>{item.name}</h3>
-                        <div>
-                          {item.items.map((value) => (
-                            <span className="detail-page-capacity" key={nanoid()}>{value.value}</span>
-                          ))}
-                        </div>
-                      </div>
-                    }
-                  </div>
-                )) }
-                {/* <button className="delete-button" onClick={() => removeFromCart(item.id)}>Delete</button> */}
+            <div className="cart-overlay-buttons-div">
+              <div className="cart-overlay-buttons">
+                <button className="cart-overlay-button" onClick={() => increment(item)}>+</button>
+                <span>{item.count}</span>
+                <button className="cart-overlay-button" onClick={() => decrement(item, item.count)}>-</button>
               </div>
-              <div className="cart-overlay-buttons-div">
-                <div className="cart-overlay-buttons">
-                  <button className="cart-overlay-button" onClick={() => increment(item.id)}>+</button>
-                  <span>{item.count}</span>
-                  <button className="cart-overlay-button" onClick={() => decrement(item.id)}>-</button>
-                </div>
-                <img src={item.gallery[0]} className="cart-overlay-image"/>
-              </div>
+              <img src={item.gallery[0]} className="cart-overlay-image" alt="overlay" />
+            </div>
           </div>
-          }
         </div>
       ))}
         <div className="cart-overlay-total">

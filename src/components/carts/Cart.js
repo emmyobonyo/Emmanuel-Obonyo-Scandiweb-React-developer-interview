@@ -24,8 +24,8 @@ class Cart extends PureComponent {
                   <div>
                     { item.items.map((itemAttribute) => (
                       <div className="itemAttribute-items" key={nanoid()}>
-                        { item.name == "Color" && <span className={ itemAttribute.clicked ? "swatches-clicked" : "swatches-cart"} style={{ backgroundColor: itemAttribute.value, }}></span>}
-                        { !(item.name == "Color") &&<span className={ itemAttribute.clicked ? "product-detail-items-cart-clicked" : "product-detail-items-cart"}>{itemAttribute.value}</span>}
+                        { item.name === "Color" && <span className={ itemAttribute.clicked ? "swatches-clicked" : "swatches-cart"} style={{ backgroundColor: itemAttribute.value, }}></span>}
+                        { !(item.name === "Color") &&<span className={ itemAttribute.clicked ? "product-detail-items-cart-clicked" : "product-detail-items-cart"}>{itemAttribute.value}</span>}
                       </div>
                     ))}
                   </div>
@@ -42,24 +42,10 @@ class Cart extends PureComponent {
               </div>
               { item.gallery.length > 1 &&
                 <Carousel item={item} />
-                // <div className="carousel">
-                //   <div className="carousel-inner">
-                //     { item.gallery.map((image, index) => (
-                //       <div className="carousel-item">
-                //         <CarouselItem image={image}/>
-                //       </div>
-                //     )) }
-                //   </div>
-                // </div>
-                // <Carousel>
-                //   { item.gallery.map((image) => (
-                //     <img key={nanoid()} src={image} className="cart-images"/>
-                //   )) }
-                // </Carousel>
               }
               {
                 item.gallery.length < 2 &&
-                <img src={ item.gallery[0] } className="cart-images" />
+                <img src={ item.gallery[0] } className="cart-images" alt={item.name} />
               }
             </div>
           </div>
@@ -77,7 +63,7 @@ class Cart extends PureComponent {
         </div>
         <div>
           <h3 className="toal-titles">Total:</h3>
-          <h3 className="total-titles-2">{ total == 0 ? 'You have no items in the cart' : `${ currency } ${Math.round((total + (0.21 * total))*10)/10}` }</h3>
+          <h3 className="total-titles-2">{ total === 0 ? 'You have no items in the cart' : `${ currency } ${Math.round((total + (0.21 * total))*10)/10}` }</h3>
         </div>
       </div>
       <button className="button-total">Order</button>
