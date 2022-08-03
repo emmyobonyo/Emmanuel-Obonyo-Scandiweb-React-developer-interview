@@ -19,7 +19,7 @@ class ChangeCurrencyLogic extends PureComponent {
             <div>
               {data.product.prices.map((price) => (
                 <div key={nanoid()}>
-                  {price.currency.symbol == currency &&
+                  {price.currency.symbol === currency &&
                   <div className="product-price">
                     <span>{currency}</span>
                     <span>{price.amount}</span>

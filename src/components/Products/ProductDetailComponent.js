@@ -1,3 +1,5 @@
+/* eslint-disable import/no-anonymous-default-export */
+/* eslint-disable array-callback-return */
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
 import ChangeCurrencyLogic from "./changeCurrencyLogic";
@@ -22,18 +24,18 @@ class ProductDetailComponent extends PureComponent {
     console.log(attributeName)
     if (this.state.data.attributes.length < 2) {
       this.state.data.attributes[0].items.map((item) => (
-        item._id == attributeName ? item.clicked = true : item.clicked = false
+        item._id === attributeName ? item.clicked = true : item.clicked = false
       ) )
       return this.state.data.attributes[0].items.map((item) => (
-        item._id == attributeName ? this.setState({ data: { ...this.state.data, attributes: [{...this.state.data.attributes[0], items: [...this.state.data.attributes[0].items]}] }}) : item
+        item._id === attributeName ? this.setState({ data: { ...this.state.data, attributes: [{...this.state.data.attributes[0], items: [...this.state.data.attributes[0].items]}] }}) : item
       ))
     } else {
       this.state.data.attributes.map((attribute) => {
-        attribute.items.map((item) => {
-          if(item._id == attributeName) {
+        return attribute.items.map((item) => {
+          if(item._id === attributeName) {
               item.clicked = true
               this.setState({ data: { ...this.state.data, attributes: [...this.state.data.attributes] } })
-            } else if (attribute.name == itemName) {
+            } else if (attribute.name === itemName) {
               item.clicked = false
               this.setState({ data: { ...this.state.data, attributes: [...this.state.data.attributes] } })
             }
@@ -62,10 +64,10 @@ class ProductDetailComponent extends PureComponent {
                 <div key={nanoid()}>
                   <h4 style={{ marginBottom: 10, marginTop: 40 }}>{`${item.name.toUpperCase()}:`}</h4>
                   <div>
-                    { item.name == 'Color' && item.items.map((itemAttribute) => (
+                    { item.name === 'Color' && item.items.map((itemAttribute) => (
                       <span className={!itemAttribute.clicked? "swatches" : "clicked-swatch"} key={nanoid()} style={{ backgroundColor: itemAttribute.value, }} onClick={() => this.attributeClicked(itemAttribute._id, item.id)}></span>
                     ))}
-                    { !(item.name == 'Color') && item.items.map((itemAttribute) => (
+                    { !(item.name === 'Color') && item.items.map((itemAttribute) => (
                       <span className={!itemAttribute.clicked ? "product-detail-items" : "clicked-product-detail-items"} key={nanoid()} onClick={() => this.attributeClicked(itemAttribute._id, item.id)}>{itemAttribute.value}</span>
                     ))}
                   </div>
