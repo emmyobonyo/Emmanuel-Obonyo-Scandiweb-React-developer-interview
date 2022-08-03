@@ -1,7 +1,9 @@
 import { PureComponent } from "react";
 import { nanoid } from 'nanoid';
-import Carousel from 'nuka-carousel';
+// import Carousel from 'nuka-carousel';
 import ChangeCurrencyLogic from "../Products/changeCurrencyLogic";
+import Carousel from "./Carousel";
+// import CarouselItem from "./CarouselItem";
 import './CartOverlay.css';
 class Cart extends PureComponent {
 
@@ -39,11 +41,21 @@ class Cart extends PureComponent {
                 <button className="button" onClick={() => decrement(item, item.count)}>-</button>
               </div>
               { item.gallery.length > 1 &&
-                <Carousel>
-                  { item.gallery.map((image) => (
-                    <img key={nanoid()} src={image} className="cart-images"/>
-                  )) }
-                </Carousel>
+                <Carousel item={item} />
+                // <div className="carousel">
+                //   <div className="carousel-inner">
+                //     { item.gallery.map((image, index) => (
+                //       <div className="carousel-item">
+                //         <CarouselItem image={image}/>
+                //       </div>
+                //     )) }
+                //   </div>
+                // </div>
+                // <Carousel>
+                //   { item.gallery.map((image) => (
+                //     <img key={nanoid()} src={image} className="cart-images"/>
+                //   )) }
+                // </Carousel>
               }
               {
                 item.gallery.length < 2 &&

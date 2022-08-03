@@ -201,3 +201,42 @@
   font-weight: bolder;
   cursor: pointer;
 }
+
+.carousel {
+  margin: 0 auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-inner {
+  white-space: nowrap;
+  transition: ease 1s;
+}
+
+.carousel-item {
+  display: inline-block;
+  width: 100%;
+
+}
+
+.carousel-control {
+  background-color: rgba(0, 0, 0, 0.7);
+  border: none;
+  display: inline-block;
+  position: absolute;
+  padding: 3px 6px;
+  /* height: 10px; */
+  /* top: calc(50% - 25px); */
+  color: white;
+  cursor: pointer;
+}
+
+.left {
+  right: 35px;
+  bottom: 20px;
+}
+
+.right {
+  right: 10px;
+  bottom: 20px;
+}
