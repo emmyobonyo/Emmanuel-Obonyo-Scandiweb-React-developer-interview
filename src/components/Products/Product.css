@@ -64,3 +64,11 @@
   align-items: center;
   height: 100%;
 }
+
+.product-listing-page {
+  display: flex;
+}
+
+.product-listing-filter {
+  width: 20%;
+}
