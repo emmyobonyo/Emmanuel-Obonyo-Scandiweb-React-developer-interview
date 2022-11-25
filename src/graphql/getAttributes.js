@@ -4,6 +4,7 @@ const GET_ATTRIBUTES = gql`
 query category($input: CategoryInput!) {
   category(input: $input) {
     products {
+      name
       attributes {
         id
         name

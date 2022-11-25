@@ -7,6 +7,16 @@ import Filter from './Filter';
 import './Product.css'
 
 class Product extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      stateChanged: false,
+    }
+  }
+
+  changeProductState = () => {
+    console.log('Change Product State')
+  }
   render() {
     const { category } = this.props.params;
     const { homepage, currency, addToCart, closeCurrencyOverlay, disabled } = this.props;
@@ -15,7 +25,7 @@ class Product extends PureComponent {
         <h1 className='category'>{!homepage ? category : homepage}</h1>
         <div className='product-listing-page'>
           <div className='product-listing-filter'>
-            <Filter />
+            <Filter changeProductState={this.changeProductState} />
           </div>
           <div className='product-items'>
             <Query
@@ -26,7 +36,8 @@ class Product extends PureComponent {
             >
               {({ loading, data }) => {
                 if (loading) return null;
-                return <ProductItem data={data} disabled={disabled} addToCart={addToCart} currency={currency}/>
+                console.log(data)
+                return <ProductItem data={data} disabled={disabled} addToCart={addToCart} currency={currency} />
               }}
             </Query>
           </div>
@@ -35,7 +46,6 @@ class Product extends PureComponent {
     );
   }
 }
-// eslint-disable-next-line import/no-anonymous-default-export
 export default (props) => (
   <Product
     {...props}

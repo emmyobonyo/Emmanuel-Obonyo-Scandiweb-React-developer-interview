@@ -2,7 +2,7 @@ import { PureComponent } from 'react';
 import { useParams } from 'react-router-dom';
 import FilteredItems from './FilteredItems';
 import { Query } from '@apollo/client/react/components';
-import GET_ATTRIBUTES from '../../graphql/getAttributes';
+import GET_PRODUCTS from '../../graphql/getProducts';
 
 class Filter extends PureComponent {
   render() {
@@ -12,12 +12,13 @@ class Filter extends PureComponent {
       <div>
         <Query
           key="yes"
-          query={GET_ATTRIBUTES}
+          query={GET_PRODUCTS}
           variables={{ input: { title: `${!category ? 'all' : category}` } }}
           fetchPolicy="network-only"
         >
           {({ loading, data }) => {
             if (loading) return null;
+            console.log(data)
             return <FilteredItems data={data} />
           }}
         </Query>

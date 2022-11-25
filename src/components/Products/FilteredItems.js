@@ -9,6 +9,8 @@ class FilteredItems extends PureComponent {
     }
   }
   render() {
+    console.log(this.state.data)
+    const { changeProductState } = this.props;
     const attributeNames = [];
     this.state.data.map((product) => {
       product.attributes.map((attribute) => {
@@ -17,7 +19,7 @@ class FilteredItems extends PureComponent {
     })
     console.log(attributeNames)
     return (
-      <FilteredItemsComponent names={attributeNames} attributes={this.state.data}/> 
+      <FilteredItemsComponent names={attributeNames} attributes={this.state.data} changeProductState={changeProductState}/> 
     )
   }
 }
