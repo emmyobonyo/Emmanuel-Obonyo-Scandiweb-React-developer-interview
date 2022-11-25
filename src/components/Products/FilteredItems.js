@@ -17,7 +17,7 @@ class FilteredItems extends PureComponent {
     })
     console.log(attributeNames)
     return (
-      <FilteredItemsComponent names={attributeNames}/> 
+      <FilteredItemsComponent names={attributeNames} attributes={this.state.data}/> 
     )
   }
 }
