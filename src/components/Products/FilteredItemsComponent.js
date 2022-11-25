@@ -2,10 +2,13 @@ import { PureComponent } from 'react';
 
 class FilteredItemsComponent extends PureComponent {
   render() {
-    const { attribute } = this.props;
-    console.log(attribute)
+    const { attribute, names } = this.props;
     return (
-      <h5>{attribute.name}</h5>
+      <div>
+        {names.map((name) => (
+          <h5>{name}</h5>
+        ))}
+      </div>
     )
   }
 }
