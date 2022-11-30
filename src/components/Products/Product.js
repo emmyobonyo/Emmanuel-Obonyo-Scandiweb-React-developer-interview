@@ -1,4 +1,5 @@
 import { PureComponent } from 'react';
+import { withRouter } from './withRouter';
 import { useParams } from 'react-router-dom';
 import { Query } from '@apollo/client/react/components';
 import GET_PRODUCTS from '../../graphql/getProducts';
@@ -14,10 +15,10 @@ class Product extends PureComponent {
     }
   }
 
-  changeProductState = () => {
-    console.log('Change Product State')
-  }
   render() {
+    const changeProductState = () => {
+      this.props.navigate('/foo')
+    }
     const { category } = this.props.params;
     const { homepage, currency, addToCart, closeCurrencyOverlay, disabled } = this.props;
     return (
@@ -25,7 +26,7 @@ class Product extends PureComponent {
         <h1 className='category'>{!homepage ? category : homepage}</h1>
         <div className='product-listing-page'>
           <div className='product-listing-filter'>
-            <Filter changeProductState={this.changeProductState} />
+            <Filter changeProductState={changeProductState} />
           </div>
           <div className='product-items'>
             <Query
@@ -46,9 +47,9 @@ class Product extends PureComponent {
     );
   }
 }
-export default (props) => (
+export default withRouter((props) => (
   <Product
     {...props}
     params={useParams()}
-  />
+  />)
 );

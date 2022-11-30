@@ -6,7 +6,7 @@ class FilteredItemsComponent extends PureComponent {
     console.log(attributes)
     let filteredArray = [];
     const filtered = (name) => (
-      <select onClick={changeProductState}>
+      <select onChange={changeProductState}>
         {attributes.map((attribute) => {
           attribute.attributes.map((attribute) => {
             <>

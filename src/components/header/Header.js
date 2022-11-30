@@ -228,6 +228,7 @@ class Header extends PureComponent {
         { this.state.itemInCart ? <p className='itemInCartParagraph'>Item already in cart</p> : this.state.itemAddedToCart && <p className='itemAddedToCart'>Item Added to the cart </p>}
         <Routes>
           <Route path="/" element={<Product homepage="all" currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled} />} />
+          {/* <Route exact path="/:category/?:home" element={<FilteredProducts currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled} />}/> */}
           <Route path="/:category" element={<Product currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay} disabled={this.state.disabled} />}/>
           <Route path="/product/:id" element={ <ProductDetail currency={currency} addToCart={this.addToCart} closeCurrencyOverlay={closeCurrencyOverlay}/>} />
           <Route path="/cart" element={ <Cart cartItems={this.state.cartItems} currency={currency} increment={this.increment} decrement={this.decrement} total={this.state.total} closeCurrencyOverlay={closeCurrencyOverlay} quantity={this.state.quantity} /> }/>
