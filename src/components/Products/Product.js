@@ -16,8 +16,14 @@ class Product extends PureComponent {
   }
 
   render() {
-    const changeProductState = () => {
-      this.props.navigate('/foo')
+    const changeProductState = (e) => {
+      const value = e.target.value
+      const key = e.target.parentElement.firstChild.innerText
+      if (!category) {
+        this.props.navigate(`/all/?${key}=${value}`)
+      } else {
+        this.props.navigate(`/${category}/?${key}=${value}`)
+      }
     }
     const { category } = this.props.params;
     const { homepage, currency, addToCart, closeCurrencyOverlay, disabled } = this.props;
