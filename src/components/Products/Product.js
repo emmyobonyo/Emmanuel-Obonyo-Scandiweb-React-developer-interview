@@ -18,12 +18,12 @@ class Product extends PureComponent {
   }
 
   render() {
-    // console.log(this.state.nameVlaue)
     const changeProductState = (e) => {
       const value = e.target.value
       const key = e.target.parentElement.firstChild.innerText
       if (!category) {
         this.props.navigate(`/all/?${key}=${value}`)
+        this.setState({ name: key, nameValue: value })
       } else {
         this.props.navigate(`/${category}/?${key}=${value}`)
         this.setState({ name: key, nameValue: value })
@@ -54,7 +54,6 @@ class Product extends PureComponent {
             >
               {({ loading, data }) => {
                 if (loading) return null
-                console.log(data)
                 return (
                   <ProductItem
                     data={data}
