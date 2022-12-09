@@ -18,15 +18,29 @@ class Product extends PureComponent {
   }
 
   render() {
+    const getURLParamsHandler = () => {
+      const queryString = window.location.search
+      if (queryString) {
+        const urlParams = new URLSearchParams(queryString)
+        const name = urlParams.get('name')
+        const value = urlParams.get('value')
+        this.setState({ name, nameValue: value })
+      } else {
+        const name = null
+        const value = null
+        this.setState({ name, nameValue: value })
+      }
+    }
+    getURLParamsHandler()
     const changeProductState = (e) => {
       const value = e.target.value
       const key = e.target.parentElement.firstChild.innerText
       if (!category) {
-        this.props.navigate(`/all/?${key}=${value}`)
-        this.setState({ name: key, nameValue: value })
+        this.props.navigate(`/all/?name=${key}&value=${value}`)
+        // this.setState({ name: key, nameValue: value })
       } else {
-        this.props.navigate(`/${category}/?${key}=${value}`)
-        this.setState({ name: key, nameValue: value })
+        this.props.navigate(`/${category}/?name=${key}&value=${value}`)
+        // this.setState({ name: key, nameValue: value })
       }
     }
     console.log(this.state)
