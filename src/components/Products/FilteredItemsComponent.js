@@ -1,37 +1,55 @@
-import { PureComponent } from 'react';
+import { PureComponent } from 'react'
 
 class FilteredItemsComponent extends PureComponent {
   render() {
-    const { attributes, names, changeProductState } = this.props;
-    console.log(attributes)
-    let filteredArray = [];
-    const filtered = (name) => (
-      <select onChange={changeProductState}>
-        {attributes.map((attribute) => {
-          attribute.attributes.map((attribute) => {
-            <>
-              { attribute.name == name ?
-                attribute.items.map((item) => {
-                  filteredArray.push(item.value)
-                })
-              : console.log('nothing')}
-            </>
-          })
-        }) }
-        {[...new Set(filteredArray)].map((item) => (
-          <option>{item}</option>
-        ))}
-        { filteredArray = []}
-      </select>
-    )
+    const { attributes, names, changeProductState } = this.props
+    let filteredArray = []
+    const filtered = (name) =>
+      name != 'Color' ? (
+        <select onChange={changeProductState}>
+          {attributes.map((attribute) => {
+            attribute.attributes.map((attribute) => {
+              ;<>
+                {attribute.name == name
+                  ? attribute.items.map((item) => {
+                      filteredArray.push(item.value)
+                    })
+                  : console.log('nothing')}
+              </>
+            })
+          })}
+          {[...new Set(filteredArray)].map((item) => (
+            <option>{item}</option>
+          ))}
+          {(filteredArray = [])}
+        </select>
+      ) : (
+        <>
+          {attributes.map((attribute) => {
+            attribute.attributes.map((attribute) => {
+              ;<>
+                {attribute.name == name
+                  ? attribute.items.map((item) => {
+                      filteredArray.push(item.value)
+                    })
+                  : console.log('nothing')}
+              </>
+            })
+          })}
+          {[...new Set(filteredArray)].map((item) => (
+            <span>{item}</span>
+          ))}
+          {(filteredArray = [])}
+        </>
+      )
 
-    filtered('Size');
+    filtered('Size')
     return (
       <div>
         {names.map((name) => (
           <div>
             <h5>{name}</h5>
-            { filtered(name) }
+            {filtered(name)}
           </div>
         ))}
       </div>
@@ -39,4 +57,4 @@ class FilteredItemsComponent extends PureComponent {
   }
 }
 
-export default FilteredItemsComponent;
+export default FilteredItemsComponent

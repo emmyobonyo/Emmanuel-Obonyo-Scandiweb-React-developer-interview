@@ -125,15 +125,66 @@ class ProductItem extends PureComponent {
                             hideAddToCartButton={this.hideAddToCartButton}
                           />
                         </div>
+                      ) : product.attributes.length === 0 ? (
+                        <div
+                          className='add-to-cart-product-div'
+                          onMouseEnter={() =>
+                            this.showAddToCartButton(product.id)
+                          }
+                          onMouseLeave={() =>
+                            this.hideAddToCartButton(product.id)
+                          }
+                        >
+                          <Link to={`/product/${product.id}`}>
+                            <ProductComponent
+                              product={product}
+                              disabled={disabled}
+                              currency={currency}
+                              showAddToCartButton={this.showAddToCartButton}
+                              hideAddToCartButton={this.hideAddToCartButton}
+                            />
+                          </Link>
+                          {product.attributes.length === 0 &&
+                            product.hover &&
+                            product.inStock && (
+                              <img
+                                src={Common}
+                                alt='add-to-cart'
+                                onClick={() => addToCart(product)}
+                                className='add-to-cart-button'
+                              />
+                            )}
+                        </div>
                       ) : (
-                        console.log('yes')
+                        <div className='add-to-cart-product-div'>
+                          <Link to={`/product/${product.id}`}>
+                            <ProductComponent
+                              product={product}
+                              disabled={disabled}
+                              currency={currency}
+                              showAddToCartButton={this.showAddToCartButton}
+                              hideAddToCartButton={this.hideAddToCartButton}
+                            />
+                            {product.attributes.length === 0 &&
+                              this.state.onHover &&
+                              product.hover &&
+                              product.inStock && (
+                                <img
+                                  src={Common}
+                                  alt='add-to-cart'
+                                  onClick={() => addToCart(product)}
+                                  className='add-to-cart-button'
+                                />
+                              )}
+                          </Link>
+                        </div>
                       )}
                     </div>
                   ) : (
                     console.log('no match')
                   )
                 )
-              : console.log('none')
+              : console.log('some stuff')
           )
         )
   }
