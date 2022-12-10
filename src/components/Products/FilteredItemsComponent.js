@@ -71,6 +71,7 @@ class FilteredItemsComponent extends PureComponent {
               <input
                 type='checkbox'
                 value={`${item}`}
+                onClick={changeProductState}
               />
               <label for='vehicle1'>{item}</label>
             </>
