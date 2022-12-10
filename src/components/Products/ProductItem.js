@@ -93,12 +93,49 @@ class ProductItem extends PureComponent {
                     showAddToCartButton={this.showAddToCartButton}
                     hideAddToCartButton={this.hideAddToCartButton}
                   />
+                  {product.attributes.length === 0 &&
+                    this.state.onHover &&
+                    product.hover &&
+                    product.inStock && (
+                      <img
+                        src={Common}
+                        alt='add-to-cart'
+                        onClick={() => addToCart(product)}
+                        className='add-to-cart-button'
+                      />
+                    )}
                 </Link>
               </div>
             )}
           </div>
         ))
-      : console.log(product.attributes)
+      : this.state.data.map((product) =>
+          product.attributes.map((attribute) =>
+            attribute.name == name
+              ? attribute.items.map((item) =>
+                  item.value == value ? (
+                    <div key={nanoid()}>
+                      {!product.inStock ? (
+                        <div>
+                          <ProductComponent
+                            product={product}
+                            disabled={disabled}
+                            currency={currency}
+                            showAddToCartButton={this.showAddToCartButton}
+                            hideAddToCartButton={this.hideAddToCartButton}
+                          />
+                        </div>
+                      ) : (
+                        console.log('yes')
+                      )}
+                    </div>
+                  ) : (
+                    console.log('no match')
+                  )
+                )
+              : console.log('none')
+          )
+        )
   }
 }
 
