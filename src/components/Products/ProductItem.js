@@ -33,6 +33,7 @@ class ProductItem extends PureComponent {
   render() {
     const { disabled, addToCart, currency, name, value } = this.props
     console.log(name, value)
+    let newValue = `#${value}`
     return name == null && value == null
       ? this.state.data.map((product) => (
           <div key={nanoid()}>
@@ -113,7 +114,7 @@ class ProductItem extends PureComponent {
           product.attributes.map((attribute) =>
             attribute.name == name
               ? attribute.items.map((item) =>
-                  item.value == value ? (
+                  item.value == value || item.value == newValue ? (
                     <div key={nanoid()}>
                       {!product.inStock ? (
                         <div>
@@ -181,7 +182,7 @@ class ProductItem extends PureComponent {
                       )}
                     </div>
                   ) : (
-                    console.log('no match')
+                    console.log(`no match ${item.value} and ${value}`)
                   )
                 )
               : console.log('some stuff')

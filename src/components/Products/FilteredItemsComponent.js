@@ -48,6 +48,7 @@ class FilteredItemsComponent extends PureComponent {
               className='filtered-colors'
               style={{ backgroundColor: item }}
               onClick={changeProductState}
+              id={item}
             ></span>
           ))}
           {(filteredArray.length = 0)}
