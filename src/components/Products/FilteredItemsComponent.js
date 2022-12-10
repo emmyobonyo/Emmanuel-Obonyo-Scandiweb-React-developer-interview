@@ -1,6 +1,13 @@
 import { PureComponent } from 'react'
 
 class FilteredItemsComponent extends PureComponent {
+  componentDidMount() {
+    const element = document.getElementsByClassName('filtered-colors')
+    if (element.length > 0) {
+      const lastElement = element[0].parentElement.lastChild
+      lastElement.remove()
+    }
+  }
   render() {
     const { attributes, names, changeProductState } = this.props
     let filteredArray = []
@@ -37,7 +44,11 @@ class FilteredItemsComponent extends PureComponent {
             })
           })}
           {[...new Set(filteredArray)].map((item) => (
-            <span style={{ backgroundColor: item }}>{item}</span>
+            <span
+              className='filtered-colors'
+              style={{ backgroundColor: item }}
+              onClick={changeProductState}
+            ></span>
           ))}
           {(filteredArray.length = 0)}
         </>
