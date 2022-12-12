@@ -3,24 +3,31 @@
 > An eCommerce built with React and GraphQL.
 
 ### Home Page
-![Home Page](./public/images/Home.png)
+
+![Home Page](./public/images/homepage1.png)
 
 ### Clothes Page
-![Clothes Page](./public/images/clothes.png)
+
+![Clothes Page](./public/images/clothes1.png)
 
 ### Tech Page
-![Tech Page](./public/images/tech.png)
+
+![Tech Page](./public/images/tech1.png)
 
 ### Currency Overlay
+
 ![Currency Page](./public/images/currency.png)
 
 ### Cart Overlay
+
 ![Cart](./public/images/carts.png)
 
 ### Product Detail
+
 ![Product Details](./public/images/productDetail.png)
 
 ### Cart Page
+
 ![Cart Page](./public/images/cartPage.png)
 
 - A User can add a product to the cart.
@@ -36,7 +43,9 @@
 - CSS
 
 # Set Up
+
 # Backend
+
 ```
 $ git clone https://github.com/scandiweb/junior-react-endpoint.git
 $ cd junior-react-endpoint
@@ -44,9 +53,11 @@ $ npm install
 $ npm run build
 $ npm start
 ```
+
 Navigate to `http://localhost:4000/` on your browser to ensure that the GraphQl server is up and running.
 
-# Frontend 
+# Frontend
+
 ```
 $ git clone https://github.com/emmyobonyo/emmanuel-obonyo-scandiweb-react-developer-interview.git
 $ cd emmanuel-obonyo-scandiweb-react-developer-interview
