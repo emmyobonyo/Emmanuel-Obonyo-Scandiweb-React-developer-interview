@@ -83,7 +83,7 @@ class FilteredItemsComponent extends PureComponent {
       <div>
         {names.map((name) => (
           <div>
-            <h4>{name}</h4>
+            <h5>{name}</h5>
             {filtered(name)}
           </div>
         ))}
