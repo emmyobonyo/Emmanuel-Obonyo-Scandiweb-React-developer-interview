@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import { PureComponent } from 'react'
 import FilteredItemsComponent from './FilteredItemsComponent'
 

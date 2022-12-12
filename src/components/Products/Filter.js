@@ -1,3 +1,4 @@
+/* eslint-disable  import/no-anonymous-default-export */
 import { PureComponent } from 'react'
 import { useParams } from 'react-router-dom'
 import FilteredItems from './FilteredItems'

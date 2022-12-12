@@ -36,7 +36,7 @@ class Product extends PureComponent {
     const changeProductState = (e) => {
       let value = e.target.value || e.target.id
       let newValue
-      if (value.charAt(0) == '#') {
+      if (value.charAt(0) === '#') {
         console.log('yes')
         newValue = value.substring(1)
       } else {

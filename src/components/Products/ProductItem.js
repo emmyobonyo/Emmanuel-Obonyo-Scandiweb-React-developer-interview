@@ -112,9 +112,9 @@ class ProductItem extends PureComponent {
         ))
       : this.state.data.map((product) =>
           product.attributes.map((attribute) =>
-            attribute.name == name
+            attribute.name === name
               ? attribute.items.map((item) =>
-                  item.value == value || item.value == newValue ? (
+                  item.value === value || item.value === newValue ? (
                     <div key={nanoid()}>
                       {!product.inStock ? (
                         <div>
