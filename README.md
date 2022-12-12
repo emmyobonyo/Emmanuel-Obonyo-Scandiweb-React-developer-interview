@@ -26,10 +26,6 @@
 
 ![Product Details](./public/images/productDetail.png)
 
-### Cart Page
-
-![Cart Page](./public/images/cartPage.png)
-
 - A User can add a product to the cart.
 - A User can choose the currency that they prefer.
 - A User can delete a product from the cart.
