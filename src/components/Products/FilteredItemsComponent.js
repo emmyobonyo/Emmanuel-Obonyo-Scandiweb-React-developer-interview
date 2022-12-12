@@ -1,3 +1,4 @@
+/*eslint-disable array-callback-return */
 import { PureComponent } from 'react'
 
 class FilteredItemsComponent extends PureComponent {
@@ -12,14 +13,14 @@ class FilteredItemsComponent extends PureComponent {
     const { attributes, names, changeProductState } = this.props
     let filteredArray = []
     const filtered = (name) =>
-      name == 'Size' || name == 'Capacity' ? (
+      name === 'Size' || name === 'Capacity' ? (
         <select onChange={changeProductState}>
           {attributes.map((attribute) => {
-            attribute.attributes.map((attribute) => {
+            return attribute.attributes.map((attribute) => {
               ;<>
-                {attribute.name == name
+                {attribute.name === name
                   ? attribute.items.map((item) => {
-                      filteredArray.push(item.value)
+                      return filteredArray.push(item.value)
                     })
                   : console.log('nothing')}
               </>
@@ -30,12 +31,12 @@ class FilteredItemsComponent extends PureComponent {
           ))}
           {(filteredArray.length = 0)}
         </select>
-      ) : name == 'Color' ? (
+      ) : name === 'Color' ? (
         <>
           {attributes.map((attribute) => {
-            attribute.attributes.map((attribute) => {
+            return attribute.attributes.map((attribute) => {
               ;<>
-                {attribute.name == name
+                {attribute.name === name
                   ? attribute.items.map((item) => {
                       filteredArray.push(item.value)
                     })
@@ -58,9 +59,9 @@ class FilteredItemsComponent extends PureComponent {
           {attributes.map((attribute) => {
             attribute.attributes.map((attribute) => {
               ;<>
-                {attribute.name == name
+                {attribute.name === name
                   ? attribute.items.map((item) => {
-                      filteredArray.push(item.value)
+                      return filteredArray.push(item.value)
                     })
                   : console.log('nothing')}
               </>
@@ -82,7 +83,7 @@ class FilteredItemsComponent extends PureComponent {
       <div>
         {names.map((name) => (
           <div>
-            <h5>{name}</h5>
+            <h4>{name}</h4>
             {filtered(name)}
           </div>
         ))}
