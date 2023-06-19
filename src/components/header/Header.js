@@ -64,7 +64,6 @@ class Header extends PureComponent {
 
   onChange = (event) => {
     const { dataset } = event.target
-    console.log(dataset.value)
     localStorage.setItem('symbol', `${dataset.value}`)
     this.setState({ currency: dataset.value, currencyOverlay: false })
   }
