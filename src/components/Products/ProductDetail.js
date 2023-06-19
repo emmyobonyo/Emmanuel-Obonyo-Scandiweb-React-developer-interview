@@ -32,7 +32,6 @@ class ProductDetail extends PureComponent {
               }),
             };
           });
-          console.log(newAttributes);
           data.product.attributes = newAttributes
           return <ProductDetailComponent data={data} currency={currency} addToCart={addToCart} closeCurrencyOverlay={closeCurrencyOverlay} id={id}/>
         }}

@@ -14,9 +14,9 @@ class FilteredItems extends PureComponent {
     const attributeNames = []
     this.state.data.map((product) => {
       product.attributes.map((attribute) => {
-        attributeNames.indexOf(attribute.name) === -1
-          ? attributeNames.push(attribute.name)
-          : console.log('Item already exists')
+        if (attributeNames.indexOf(attribute.name) === -1) {
+          attributeNames.push(attribute.name)
+        }
       })
     })
     return (

@@ -24,7 +24,6 @@ class Product extends PureComponent {
         const urlParams = new URLSearchParams(queryString)
         const name = urlParams.get('name')
         const value = urlParams.get('value')
-        console.log(`This is the ${value}`)
         this.setState({ name, nameValue: value })
       } else {
         const name = null
@@ -37,12 +36,10 @@ class Product extends PureComponent {
       let value = e.target.value || e.target.id
       let newValue
       if (value.charAt(0) === '#') {
-        console.log('yes')
         newValue = value.substring(1)
       } else {
         newValue = value
       }
-      console.log(value)
       const key = e.target.parentElement.firstChild.innerText
       if (!category) {
         this.props.navigate(`/all/?name=${key}&value=${newValue}`)
@@ -50,7 +47,6 @@ class Product extends PureComponent {
         this.props.navigate(`/${category}/?name=${key}&value=${newValue}`)
       }
     }
-    console.log(this.state)
     const { category } = this.props.params
     const { homepage, currency, addToCart, closeCurrencyOverlay, disabled } =
       this.props

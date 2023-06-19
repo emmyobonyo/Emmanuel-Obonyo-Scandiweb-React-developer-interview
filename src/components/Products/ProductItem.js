@@ -16,7 +16,6 @@ class ProductItem extends PureComponent {
   showAddToCartButton = (id) => {
     const product = this.state.data.filter((item) => item.id === id)
     product[0].hover = true
-    console.log(product[0].hover)
     this.setState({
       onHover: true,
     })
@@ -32,7 +31,6 @@ class ProductItem extends PureComponent {
 
   render() {
     const { disabled, addToCart, currency, name, value } = this.props
-    console.log(name, value)
     let newValue = `#${value}`
     return name == null && value == null
       ? this.state.data.map((product) => (

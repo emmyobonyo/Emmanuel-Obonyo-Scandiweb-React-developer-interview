@@ -21,7 +21,6 @@ class ProductDetailComponent extends PureComponent {
   }
 
   attributeClicked = (attributeName, itemName) => {
-    console.log(attributeName)
     if (this.state.data.attributes.length < 2) {
       this.state.data.attributes[0].items.map((item) => (
         item._id === attributeName ? item.clicked = true : item.clicked = false
@@ -45,7 +44,6 @@ class ProductDetailComponent extends PureComponent {
   }
 
   render() {
-    console.log(this.state)
     const { currency, addToCart, closeCurrencyOverlay, id } = this.props
     return (
       <div className="product-detail" onClick={closeCurrencyOverlay}>
