@@ -22,7 +22,7 @@ class FilteredItemsComponent extends PureComponent {
                   ? attribute.items.map((item) => {
                       return filteredArray.push(item.value)
                     })
-                  : console.log('nothing')}
+                  : null}
               </>
             })
           })}
@@ -40,7 +40,7 @@ class FilteredItemsComponent extends PureComponent {
                   ? attribute.items.map((item) => {
                       filteredArray.push(item.value)
                     })
-                  : console.log('nothing')}
+                  : null}
               </>
             })
           })}
@@ -63,7 +63,7 @@ class FilteredItemsComponent extends PureComponent {
                   ? attribute.items.map((item) => {
                       return filteredArray.push(item.value)
                     })
-                  : console.log('nothing')}
+                  : null}
               </>
             })
           })}
@@ -74,7 +74,7 @@ class FilteredItemsComponent extends PureComponent {
                 value={`${item}`}
                 onClick={changeProductState}
               />
-              <label for='vehicle1'>{item}</label>
+              <label htmlFor='vehicle1'>{item}</label>
             </>
           ))}
         </>

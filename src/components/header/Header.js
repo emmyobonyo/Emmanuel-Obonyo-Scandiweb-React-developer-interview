@@ -201,7 +201,7 @@ class Header extends PureComponent {
                     to={`/${category.name}`}
                     key={nanoid()}
                     className='nav-li'
-                    activeClassName='active'
+                    activeclassname='active'
                   >
                     {category.name.toUpperCase()}
                   </NavLink>

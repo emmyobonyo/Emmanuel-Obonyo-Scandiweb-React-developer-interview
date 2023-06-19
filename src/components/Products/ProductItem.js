@@ -180,10 +180,10 @@ class ProductItem extends PureComponent {
                       )}
                     </div>
                   ) : (
-                    console.log(`no match ${item.value} and ${value}`)
+                    null
                   )
                 )
-              : console.log('some stuff')
+              : null
           )
         )
   }
