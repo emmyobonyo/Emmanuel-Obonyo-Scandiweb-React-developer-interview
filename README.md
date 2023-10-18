@@ -1,4 +1,4 @@
-# ScandiWeb eCommerce
+# eCommerce
 
 > An eCommerce built with React and GraphQL.
 
